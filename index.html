@@ -1,0 +1,1630 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PT CBC PROPERTY - Hunian Modern & Investasi Terbaik</title>
+    <!-- Google Fonts - Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Leaflet.js Map CSS & JS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            500: '#10b981',
+                            600: '#059669',
+                            700: '#047857',
+                            800: '#065f46',
+                            900: '#064e3b',
+                        },
+                        accent: {
+                            500: '#f59e0b',
+                            600: '#d97706',
+                            700: '#b45309',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Smooth Custom Styles */
+        .glassmorphism {
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col antialiased">
+
+    <!-- Floating Header / Navbar -->
+    <header class="fixed top-0 left-0 w-full z-50 transition-all duration-300" id="main-header">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo & Brand Name -->
+                <a href="#home" class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-accent-500 flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-brand-900/20">
+                        C
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="font-extrabold text-lg text-slate-900 tracking-tight leading-none" id="brand-text-main">PT CBC PROPERTY</span>
+                        <span class="text-xs text-brand-600 font-semibold tracking-wider uppercase mt-1">Property Development</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation Menu -->
+                <nav class="hidden md:flex items-center space-x-1 lg:space-x-2">
+                    <a href="#home" class="px-3 py-2 rounded-lg text-sm font-semibold transition-all duration-200 text-slate-700 hover:text-brand-600 hover:bg-slate-100">Beranda</a>
+                    <a href="#tentang" class="px-3 py-2 rounded-lg text-sm font-semibold transition-all duration-200 text-slate-700 hover:text-brand-600 hover:bg-slate-100">Tentang Kami</a>
+                    <a href="#unit" class="px-3 py-2 rounded-lg text-sm font-semibold transition-all duration-200 text-slate-700 hover:text-brand-600 hover:bg-slate-100">Unit Properti</a>
+                    <a href="#keunggulan" class="px-3 py-2 rounded-lg text-sm font-semibold transition-all duration-200 text-slate-700 hover:text-brand-600 hover:bg-slate-100">Keunggulan</a>
+                    <a href="#galeri" class="px-3 py-2 rounded-lg text-sm font-semibold transition-all duration-200 text-slate-700 hover:text-brand-600 hover:bg-slate-100">Progres Galeri</a>
+                    <a href="#kontak" class="px-3 py-2 rounded-lg text-sm font-semibold transition-all duration-200 text-slate-700 hover:text-brand-600 hover:bg-slate-100">Hubungi</a>
+                </nav>
+
+                <!-- Action Button -->
+                <div class="hidden md:flex items-center">
+                    <a href="https://wa.me/62895359048761?text=Halo%20PT%20CBC%20PROPERTY,%20saya%20tertarik%20konsultasi%20mengenai%20properti" target="_blank" class="inline-flex items-center justify-center px-5 py-2.5 rounded-xl bg-brand-600 text-white font-semibold text-sm hover:bg-brand-700 transition-all duration-350 shadow-md hover:shadow-lg shadow-brand-600/20 gap-2">
+                        <i class="fa-brands fa-whatsapp text-lg"></i>
+                        <span>Konsultasi Gratis</span>
+                    </a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button type="button" class="text-slate-700 hover:text-brand-600 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500" id="btn-mobile-menu">
+                        <i class="fa-solid fa-bars text-2xl" id="icon-mobile-menu"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu panel -->
+        <div class="hidden md:hidden glassmorphism border-t border-slate-800 transition-all duration-300" id="mobile-menu-container">
+            <div class="px-2 pt-2 pb-4 space-y-1 sm:px-3">
+                <a href="#home" class="block px-4 py-3 rounded-xl text-base font-semibold text-white hover:bg-brand-600/20 hover:text-brand-400">Beranda</a>
+                <a href="#tentang" class="block px-4 py-3 rounded-xl text-base font-semibold text-white hover:bg-brand-600/20 hover:text-brand-400">Tentang Kami</a>
+                <a href="#unit" class="block px-4 py-3 rounded-xl text-base font-semibold text-white hover:bg-brand-600/20 hover:text-brand-400">Unit Properti</a>
+                <a href="#keunggulan" class="block px-4 py-3 rounded-xl text-base font-semibold text-white hover:bg-brand-600/20 hover:text-brand-400">Keunggulan</a>
+                <a href="#galeri" class="block px-4 py-3 rounded-xl text-base font-semibold text-white hover:bg-brand-600/20 hover:text-brand-400">Progres Galeri</a>
+                <a href="#kontak" class="block px-4 py-3 rounded-xl text-base font-semibold text-white hover:bg-brand-600/20 hover:text-brand-400">Hubungi</a>
+                <div class="pt-4 pb-2 border-t border-slate-700/50 mt-2 px-4">
+                    <a href="https://wa.me/62895359048761?text=Halo%20PT%20CBC%20PROPERTY" target="_blank" class="w-full flex items-center justify-center py-3 px-4 bg-brand-600 rounded-xl text-white font-bold text-center gap-2 hover:bg-brand-700">
+                        <i class="fa-brands fa-whatsapp text-xl"></i>
+                        <span>Hubungi via WhatsApp</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero / Main Showcase Section -->
+    <section id="home" class="relative min-h-screen flex items-center justify-center pt-24 pb-16 bg-slate-900 overflow-hidden">
+        <!-- Background Pattern & Overlay -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1920&q=80" alt="Luxury House Background" class="w-full h-full object-cover opacity-25 filter blur-xs">
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/90 to-slate-900/60"></div>
+            <!-- Decorative circle gradients -->
+            <div class="absolute top-1/4 -left-1/4 w-[600px] h-[600px] bg-brand-600/10 rounded-full filter blur-[120px]"></div>
+            <div class="absolute bottom-1/4 -right-1/4 w-[600px] h-[600px] bg-accent-500/10 rounded-full filter blur-[120px]"></div>
+        </div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Hero Left: Text Content -->
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                    <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-500/10 border border-brand-500/20 text-brand-400 text-xs sm:text-sm font-semibold uppercase tracking-wider">
+                        <i class="fa-solid fa-house-chimney-user text-xs"></i>
+                        Developer Properti Terpercaya & Legal
+                    </span>
+                    <h1 class="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-extrabold text-white tracking-tight leading-tight">
+                        Wujudkan Hunian Impian <br class="hidden sm:inline">
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-400 via-emerald-400 to-accent-400">Keluarga Masa Kini</span>
+                    </h1>
+                    <p class="text-slate-300 text-base sm:text-lg max-w-xl mx-auto lg:mx-0 font-light leading-relaxed">
+                        Kami menghadirkan perumahan berkonsep modern minimalis, berlokasi sangat strategis, dan didukung legalitas bersertifikat 100% aman untuk masa depan Anda.
+                    </p>
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+                        <a href="#unit" class="w-full sm:w-auto px-8 py-4 bg-brand-600 hover:bg-brand-700 text-white font-bold rounded-xl transition-all duration-300 shadow-lg shadow-brand-600/25 flex items-center justify-center gap-2">
+                            <span>Lihat Koleksi Unit</span>
+                            <i class="fa-solid fa-arrow-right text-sm"></i>
+                        </a>
+                        <a href="#tentang" class="w-full sm:w-auto px-8 py-4 bg-white/10 hover:bg-white/15 text-white font-semibold rounded-xl border border-white/10 hover:border-white/20 transition-all duration-300 flex items-center justify-center gap-2">
+                            <span>Tentang CBC</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Hero Right: Property Showcase Card -->
+                <div class="lg:col-span-5 hidden lg:block">
+                    <div class="bg-slate-800/80 border border-slate-700/50 p-4 rounded-3xl shadow-2xl backdrop-blur-md relative overflow-hidden group">
+                        <div class="relative rounded-2xl overflow-hidden h-64 mb-4">
+                            <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80" alt="Areum Parc Bogor" class="w-full h-full object-cover group-hover:scale-105 transition-all duration-700">
+                            <span class="absolute top-3 left-3 px-3 py-1 rounded-lg bg-brand-600 text-white font-semibold text-xs shadow-md">Unit Terlaris</span>
+                            <span class="absolute bottom-3 right-3 px-3 py-1 rounded-lg bg-slate-900/80 text-white font-semibold text-xs backdrop-blur-xs">Bogor, Kemang</span>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-start">
+                                <h3 class="text-xl font-bold text-white group-hover:text-brand-400 transition-colors">Areum Parc Luxury</h3>
+                                <p class="text-lg font-extrabold text-accent-500">Rp 750 Juta</p>
+                            </div>
+                            <p class="text-slate-400 text-sm">Scandinavian Mezzanine dengan teknologi Smart Home premium.</p>
+                            <div class="grid grid-cols-3 gap-2 py-3 border-t border-b border-slate-700/50 text-xs text-slate-300">
+                                <div class="flex items-center gap-1.5">
+                                    <i class="fa-solid fa-maximize text-brand-400"></i>
+                                    <span>LT: 72 m²</span>
+                                </div>
+                                <div class="flex items-center gap-1.5">
+                                    <i class="fa-solid fa-house-laptop text-brand-400"></i>
+                                    <span>LB: 55 m²</span>
+                                </div>
+                                <div class="flex items-center gap-1.5">
+                                    <i class="fa-solid fa-bed text-brand-400"></i>
+                                    <span>3 Kamar</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between pt-1">
+                                <span class="text-xs text-emerald-400 flex items-center gap-1"><i class="fa-solid fa-circle text-[8px] animate-ping"></i> Sertifikat Ready</span>
+                                <button onclick="openPropertyDetail('Areum Parc Luxury')" class="text-xs font-bold text-brand-400 hover:text-white flex items-center gap-1 transition-all">Info Detail <i class="fa-solid fa-chevron-right text-[10px]"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Interactive Live Search Engine -->
+            <div class="mt-16 bg-white rounded-3xl shadow-xl border border-slate-100 p-6 max-w-5xl mx-auto relative z-20">
+                <h3 class="text-slate-700 font-bold text-sm mb-4 uppercase tracking-wide flex items-center gap-2">
+                    <i class="fa-solid fa-magnifying-glass text-brand-600"></i> Cari Unit Hunian Impian Anda
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
+                    <!-- Dropdown Lokasi -->
+                    <div class="space-y-2">
+                        <label for="search-location" class="block text-xs font-bold text-slate-500 uppercase">Lokasi</label>
+                        <div class="relative">
+                            <i class="fa-solid fa-location-dot absolute left-3 top-3.5 text-slate-400"></i>
+                            <select id="search-location" class="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-brand-500 focus:bg-white text-slate-700 transition-all appearance-none">
+                                <option value="">Semua Lokasi</option>
+                                <option value="kemang">Kemang, Bogor</option>
+                                <option value="ciomas">Ciomas, Bogor</option>
+                                <option value="bojonggede">Bojonggede, Bogor</option>
+                                <option value="cibinong">Cibinong, Bogor</option>
+                            </select>
+                            <i class="fa-solid fa-chevron-down absolute right-3 top-4 text-xs text-slate-400 pointer-events-none"></i>
+                        </div>
+                    </div>
+
+                    <!-- Dropdown Harga Maksimal -->
+                    <div class="space-y-2">
+                        <label for="search-price" class="block text-xs font-bold text-slate-500 uppercase">Harga Maksimal</label>
+                        <div class="relative">
+                            <i class="fa-solid fa-tag absolute left-3 top-3.5 text-slate-400"></i>
+                            <select id="search-price" class="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-brand-500 focus:bg-white text-slate-700 transition-all appearance-none">
+                                <option value="">Semua Budget</option>
+                                <option value="500000000">Di bawah 500 Juta</option>
+                                <option value="1000000000">Di bawah 1 Milyar</option>
+                                <option value="1500000000">Di bawah 1.5 Milyar</option>
+                            </select>
+                            <i class="fa-solid fa-chevron-down absolute right-3 top-4 text-xs text-slate-400 pointer-events-none"></i>
+                        </div>
+                    </div>
+
+                    <!-- Dropdown Spesifikasi Kamar -->
+                    <div class="space-y-2">
+                        <label for="search-rooms" class="block text-xs font-bold text-slate-500 uppercase">Kamar Tidur</label>
+                        <div class="relative">
+                            <i class="fa-solid fa-bed absolute left-3 top-3.5 text-slate-400"></i>
+                            <select id="search-rooms" class="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-brand-500 focus:bg-white text-slate-700 transition-all appearance-none">
+                                <option value="">Berapa saja</option>
+                                <option value="2">Minimal 2 Kamar</option>
+                                <option value="3">Minimal 3 Kamar</option>
+                                <option value="4">Minimal 4 Kamar</option>
+                            </select>
+                            <i class="fa-solid fa-chevron-down absolute right-3 top-4 text-xs text-slate-400 pointer-events-none"></i>
+                        </div>
+                    </div>
+
+                    <!-- Search Button -->
+                    <div>
+                        <button onclick="handleFilterSearch()" class="w-full py-3.5 px-6 bg-brand-600 hover:bg-brand-700 text-white font-bold text-sm rounded-xl transition-all duration-200 flex items-center justify-center gap-2 shadow-md shadow-brand-600/10">
+                            <i class="fa-solid fa-sliders text-sm"></i>
+                            <span>Saring Properti</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: Tentang Kami -->
+    <section id="tentang" class="py-24 bg-white scroll-mt-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+                
+                <!-- Left Column: Visual Assets / Images of Developer Office & Team -->
+                <div class="lg:col-span-5 relative">
+                    <div class="relative rounded-3xl overflow-hidden shadow-2xl z-10 border border-slate-100">
+                        <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=800&q=80" alt="Tentang CBC Property" class="w-full h-full object-cover">
+                        <!-- Experience Badge Overlay -->
+                        <div class="absolute bottom-6 left-6 right-6 bg-slate-900/95 backdrop-blur-md p-6 rounded-2xl border border-white/10 text-white flex items-center gap-4">
+                            <div class="text-4xl font-extrabold text-brand-400">12+</div>
+                            <div class="text-xs font-semibold uppercase tracking-wider text-slate-300">Tahun Pengalaman dalam Konstruksi & Developer Properti Terpercaya</div>
+                        </div>
+                    </div>
+                    <!-- Decorative back elements -->
+                    <div class="absolute -top-6 -left-6 w-32 h-32 bg-brand-100 rounded-3xl -z-10 animate-pulse"></div>
+                    <div class="absolute -bottom-6 -right-6 w-32 h-32 bg-accent-50 rounded-3xl -z-10"></div>
+                </div>
+
+                <!-- Right Column: Corporate Information -->
+                <div class="lg:col-span-7 space-y-8">
+                    <div class="space-y-3">
+                        <span class="text-sm font-bold text-brand-600 uppercase tracking-widest block">Keluarga Besar CBC Property</span>
+                        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
+                            Membangun Hunian Berkualitas <br class="hidden sm:inline">
+                            Dengan Komitmen Keberlanjutan
+                        </h2>
+                    </div>
+
+                    <div class="space-y-4 text-slate-600 text-base leading-relaxed">
+                        <p>
+                            <strong>PT CBC PROPERTY (CBC Property Development)</strong> adalah perusahaan pengembang properti (real estate developer) yang berdiri sejak tahun 2014. Kami berdedikasi tinggi untuk menciptakan standar baru dalam industri properti yang mengedepankan kualitas dan kepuasan pelanggan.
+                        </p>
+                        <p>
+                            Berkantor pusat di Sleman, Yogyakarta, serta memiliki jangkauan proyek strategis di Jabodetabek khususnya Bogor, kami fokus menciptakan hunian yang nyaman, aman, tertata rapi, dan sesuai dengan kebutuhan masyarakat modern. Setiap proyek dirancang dengan mengutamakan privasi, kenyamanan, serta kualitas material terbaik.
+                        </p>
+                    </div>
+
+                    <!-- Vision & Mission -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                        <div class="p-5 bg-slate-50 rounded-2xl border border-slate-100/80 space-y-2">
+                            <div class="w-10 h-10 rounded-xl bg-brand-100 text-brand-700 flex items-center justify-center font-bold">
+                                <i class="fa-solid fa-eye text-lg"></i>
+                            </div>
+                            <h4 class="font-bold text-slate-900 text-sm">Visi Kami</h4>
+                            <p class="text-xs text-slate-500 leading-relaxed">Menjadi pengembang properti terdepan yang mengedepankan nilai keberlanjutan (sustainable living) untuk generasi saat ini dan masa depan.</p>
+                        </div>
+                        <div class="p-5 bg-slate-50 rounded-2xl border border-slate-100/80 space-y-2">
+                            <div class="w-10 h-10 rounded-xl bg-accent-100 text-accent-700 flex items-center justify-center font-bold">
+                                <i class="fa-solid fa-bullseye text-lg"></i>
+                            </div>
+                            <h4 class="font-bold text-slate-900 text-sm">Misi Kami</h4>
+                            <p class="text-xs text-slate-500 leading-relaxed">Menciptakan hunian aman, berkualitas prima, bersertifikat legalitas jelas, serta terjangkau bagi semua keluarga Indonesia.</p>
+                        </div>
+                    </div>
+
+                    <!-- Quick stats counts -->
+                    <div class="grid grid-cols-3 gap-4 pt-4 border-t border-slate-100">
+                        <div>
+                            <p class="text-2xl sm:text-3xl font-extrabold text-slate-900">500+</p>
+                            <p class="text-xs text-slate-500 font-medium">Unit Terjual</p>
+                        </div>
+                        <div>
+                            <p class="text-2xl sm:text-3xl font-extrabold text-slate-900">100%</p>
+                            <p class="text-xs text-slate-500 font-medium">Sertifikat Clear</p>
+                        </div>
+                        <div>
+                            <p class="text-2xl sm:text-3xl font-extrabold text-slate-900">8+</p>
+                            <p class="text-xs text-slate-500 font-medium">Kawasan Cluster</p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: Unit Properti -->
+    <section id="unit" class="py-24 bg-slate-50 scroll-mt-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto space-y-3 mb-16">
+                <span class="text-sm font-bold text-brand-600 uppercase tracking-widest block">Galeri Unit Kami</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">Koleksi Properti Terbaik CBC</h2>
+                <p class="text-slate-500 text-sm sm:text-base">Mulai dari hunian bertipe minimalis, modern mezzanine, hingga tipe rumah tumbuh bertingkat dengan harga terjangkau.</p>
+                
+                <!-- Category Filter Buttons -->
+                <div class="flex flex-wrap items-center justify-center gap-2 pt-6 overflow-x-auto hide-scrollbar">
+                    <button onclick="filterCategory('all')" class="category-btn px-5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 bg-brand-600 text-white" id="cat-all">Semua Unit</button>
+                    <button onclick="filterCategory('kemang')" class="category-btn px-5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 bg-white text-slate-600 hover:bg-slate-100 border border-slate-200" id="cat-kemang">Kemang, Bogor</button>
+                    <button onclick="filterCategory('ciomas')" class="category-btn px-5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 bg-white text-slate-600 hover:bg-slate-100 border border-slate-200" id="cat-ciomas">Ciomas, Bogor</button>
+                    <button onclick="filterCategory('bojonggede')" class="category-btn px-5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 bg-white text-slate-600 hover:bg-slate-100 border border-slate-200" id="cat-bojonggede">Bojonggede, Bogor</button>
+                    <button onclick="filterCategory('cibinong')" class="category-btn px-5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 bg-white text-slate-600 hover:bg-slate-100 border border-slate-200" id="cat-cibinong">Cibinong, Bogor</button>
+                </div>
+            </div>
+
+            <!-- Property Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="properties-grid">
+                <!-- Javascript will load properties dynamically here -->
+            </div>
+            
+            <!-- Empty state fallback -->
+            <div id="no-properties-fallback" class="hidden text-center py-12">
+                <div class="text-5xl text-slate-300 mb-4"><i class="fa-regular fa-folder-open"></i></div>
+                <h3 class="text-lg font-bold text-slate-700">Maaf, Unit Tidak Ditemukan</h3>
+                <p class="text-slate-500 text-sm mt-1">Coba sesuaikan filter pencarian atau saring kembali kriteria properti Anda.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: Keunggulan Properti -->
+    <section id="keunggulan" class="py-24 bg-slate-900 text-white scroll-mt-20 relative overflow-hidden">
+        <!-- Decorative bg glow -->
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-brand-600/10 rounded-full filter blur-[150px] -z-10"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto space-y-3 mb-16">
+                <span class="text-sm font-bold text-brand-400 uppercase tracking-widest block">Mengapa Memilih CBC?</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">Kelebihan Setiap Unit Hunian CBC</h2>
+                <p class="text-slate-400 text-sm sm:text-base">Setiap sudut bangunan dipikirkan matang-matang demi kenyamanan, kualitas jangka panjang, dan kelancaran investasi.</p>
+            </div>
+
+            <!-- Advantage Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="bg-slate-800/50 border border-slate-800 p-8 rounded-3xl space-y-4 hover:border-brand-500/30 transition-all duration-300 group">
+                    <div class="w-12 h-12 rounded-2xl bg-brand-500/10 text-brand-400 flex items-center justify-center text-xl font-bold group-hover:bg-brand-500 group-hover:text-white transition-all duration-300">
+                        <i class="fa-solid fa-file-shield"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-white">Legalitas & Sertifikat Aman</h4>
+                    <p class="text-slate-400 text-sm leading-relaxed">Seluruh berkas legalitas dari SHM (Sertifikat Hak Milik), IMB/PBG sudah lengkap dan siap divalidasi guna kelancaran KPR dan kepemilikan.</p>
+                </div>
+                <!-- Card 2 -->
+                <div class="bg-slate-800/50 border border-slate-800 p-8 rounded-3xl space-y-4 hover:border-brand-500/30 transition-all duration-300 group">
+                    <div class="w-12 h-12 rounded-2xl bg-brand-500/10 text-brand-400 flex items-center justify-center text-xl font-bold group-hover:bg-brand-500 group-hover:text-white transition-all duration-300">
+                        <i class="fa-solid fa-compass"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-white">Lokasi Super Strategis</h4>
+                    <p class="text-slate-400 text-sm leading-relaxed">Setiap lokasi perumahan kami dekat dengan fasilitas publik seperti stasiun kereta, akses pintu jalan tol, rumah sakit, pusat perbelanjaan, dan sekolah.</p>
+                </div>
+                <!-- Card 3 -->
+                <div class="bg-slate-800/50 border border-slate-800 p-8 rounded-3xl space-y-4 hover:border-brand-500/30 transition-all duration-300 group">
+                    <div class="w-12 h-12 rounded-2xl bg-brand-500/10 text-brand-400 flex items-center justify-center text-xl font-bold group-hover:bg-brand-500 group-hover:text-white transition-all duration-300">
+                        <i class="fa-solid fa-handshake"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-white">Desain Suka-Suka (Custom)</h4>
+                    <p class="text-slate-400 text-sm leading-relaxed">Berbeda dengan developer lain, kami memberikan kebebasan merancang tata letak (layout) interior atau fasad sesuai keinginan keluarga secara gratis.</p>
+                </div>
+                <!-- Card 4 -->
+                <div class="bg-slate-800/50 border border-slate-800 p-8 rounded-3xl space-y-4 hover:border-brand-500/30 transition-all duration-300 group">
+                    <div class="w-12 h-12 rounded-2xl bg-brand-500/10 text-brand-400 flex items-center justify-center text-xl font-bold group-hover:bg-brand-500 group-hover:text-white transition-all duration-300">
+                        <i class="fa-solid fa-hammer"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-white">Kualitas Struktur Kokoh</h4>
+                    <p class="text-slate-400 text-sm leading-relaxed">Struktur pondasi cakar ayam kokoh dengan besi ber-SNI, dinding double hebel plester aci, atap spandek/genteng beton, dan plafon gypsum tahan lama.</p>
+                </div>
+                <!-- Card 5 -->
+                <div class="bg-slate-800/50 border border-slate-800 p-8 rounded-3xl space-y-4 hover:border-brand-500/30 transition-all duration-300 group">
+                    <div class="w-12 h-12 rounded-2xl bg-brand-500/10 text-brand-400 flex items-center justify-center text-xl font-bold group-hover:bg-brand-500 group-hover:text-white transition-all duration-300">
+                        <i class="fa-solid fa-coins"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-white">Skema Pembayaran Fleksibel</h4>
+                    <p class="text-slate-400 text-sm leading-relaxed">Mendukung metode Cash Keras berdiskon besar, Cash Bertahap tanpa bunga langsung ke developer, serta KPR Bank Syariah dan Konvensional dengan DP rendah.</p>
+                </div>
+                <!-- Card 6 -->
+                <div class="bg-slate-800/50 border border-slate-800 p-8 rounded-3xl space-y-4 hover:border-brand-500/30 transition-all duration-300 group">
+                    <div class="w-12 h-12 rounded-2xl bg-brand-500/10 text-brand-400 flex items-center justify-center text-xl font-bold group-hover:bg-brand-500 group-hover:text-white transition-all duration-300">
+                        <i class="fa-solid fa-house-circle-check"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-white">Teknologi Smart Home</h4>
+                    <p class="text-slate-400 text-sm leading-relaxed">Unit premium kami telah terinstalasi sistem keamanan modern, kunci pintu digital (smart door lock), serta saklar nirkabel pintar yang terhubung ponsel.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: Progres Pembangunan -->
+    <section id="galeri" class="py-24 bg-slate-50 border-t border-slate-100 scroll-mt-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+                <div class="space-y-3">
+                    <span class="text-sm font-bold text-brand-600 uppercase tracking-widest block">Progres Lapangan</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">Galeri & Progres Pembangunan</h2>
+                    <p class="text-slate-500 text-sm max-w-2xl">Dokumentasi transparansi pengerjaan unit dilapangan. Gunakan tombol editor untuk mengelola progres secara real-time.</p>
+                </div>
+                <!-- Admin Lock/Unlock Actions -->
+                <div class="flex flex-wrap gap-2 items-center">
+                    <button onclick="handleAdminBtnClick()" class="px-5 py-2.5 rounded-xl text-xs font-bold bg-slate-800 hover:bg-slate-900 text-white flex items-center gap-2 shadow-md transition-all" id="btn-admin-gate">
+                        <i class="fa-solid fa-lock" id="icon-admin-gate"></i>
+                        <span id="admin-gate-text">Buka Modul Editor Foto</span>
+                    </button>
+                    <!-- Log Out Button -->
+                    <button id="btn-admin-logout" onclick="logoutAdmin()" class="hidden px-4 py-2.5 rounded-xl text-xs font-bold bg-red-600 hover:bg-red-700 text-white flex items-center gap-2 transition-all">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                        <span>Log Out</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Secure Authentication Gateway Modal -->
+            <div id="auth-modal" class="fixed inset-0 bg-slate-950/80 z-[100] flex items-center justify-center p-4 backdrop-blur-md hidden opacity-0 transition-opacity duration-300">
+                <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-md w-full shadow-2xl relative border border-slate-100 transform scale-95 transition-all" id="auth-modal-content">
+                    <button onclick="closeAuthModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-100 text-slate-500 flex items-center justify-center hover:bg-slate-200 transition-colors">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                    
+                    <div class="text-center space-y-3 mb-6">
+                        <div class="w-14 h-14 bg-brand-100 text-brand-600 rounded-full flex items-center justify-center text-2xl mx-auto">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900">Verifikasi Akses Admin</h3>
+                        <p class="text-xs text-slate-500 leading-relaxed">Akses modul ini dilindungi sandi untuk mencegah tindakan defacing, eksploitasi skrip (XSS), atau manipulasi visual ilegal.</p>
+                        <p class="text-[10px] text-amber-600 font-semibold bg-amber-50 rounded-lg p-2"><i class="fa-solid fa-triangle-exclamation"></i> Demo Passcode: <span class="underline">admin123</span> (bisa diubah di kode sumber)</p>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="space-y-1.5">
+                            <label for="admin-passcode-input" class="text-xs text-slate-700 font-bold">Masukkan Kode Akses Admin</label>
+                            <div class="relative">
+                                <i class="fa-solid fa-key absolute left-3 top-3.5 text-slate-400"></i>
+                                <input type="password" id="admin-passcode-input" placeholder="••••••••" class="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 text-slate-800">
+                            </div>
+                        </div>
+                        <button onclick="verifyPasscode()" class="w-full py-3 bg-brand-600 hover:bg-brand-700 text-white font-bold rounded-xl text-sm transition-all shadow-md flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-unlock-keyhole"></i>
+                            <span>Verifikasi & Masuk</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dynamic Admin Panel Module (Locked & Collapsed by default) -->
+            <div id="admin-panel" class="hidden mb-12 bg-white border border-brand-500/20 p-6 sm:p-8 rounded-3xl shadow-lg transition-all ring-1 ring-brand-500/20">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b pb-4 mb-6 gap-3">
+                    <h3 class="font-extrabold text-slate-900 text-lg flex items-center gap-2">
+                        <i class="fa-solid fa-user-shield text-brand-600"></i> Modul Pengelola Galeri (Terverifikasi Aman)
+                    </h3>
+                    <span class="px-2.5 py-1 text-xs font-bold bg-brand-100 text-brand-800 rounded-full flex items-center gap-1.5 w-fit">
+                        <i class="fa-solid fa-circle text-[8px] text-emerald-500 animate-ping"></i> Sesi Admin Aktif
+                    </span>
+                </div>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                    <!-- Form Tambah/Edit Foto -->
+                    <div class="lg:col-span-5 space-y-4">
+                        <h4 class="font-bold text-slate-800 text-sm uppercase tracking-wider" id="form-title">Tambah Foto Progres Baru</h4>
+                        
+                        <!-- Hidden ID to tracking edits -->
+                        <input type="hidden" id="admin-photo-id">
+
+                        <div class="space-y-1.5">
+                            <label for="admin-title" class="text-xs text-slate-500 font-bold">Judul Foto / Unit (Maks. 50 Karakter)</label>
+                            <input type="text" id="admin-title" maxlength="50" placeholder="Contoh: Pemasangan Kusen Aluminium" class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 text-slate-800">
+                        </div>
+
+                        <div class="space-y-1.5">
+                            <label for="admin-desc" class="text-xs text-slate-500 font-bold">Keterangan / Detail Progres (Maks. 100 Karakter)</label>
+                            <input type="text" id="admin-desc" maxlength="100" placeholder="Contoh: Pemasangan jendela anti rayap lantai 1" class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 text-slate-800">
+                        </div>
+
+                        <div class="space-y-1.5">
+                            <label for="admin-image" class="text-xs text-slate-500 font-bold">URL Tautan Gambar (Harus berprotokol HTTP/HTTPS)</label>
+                            <input type="text" id="admin-image" placeholder="https://images.unsplash.com/..." class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 text-slate-800">
+                            <!-- Preset helper images for easy click simulation -->
+                            <div class="flex gap-2 pt-1.5">
+                                <button type="button" onclick="setPresetImageUrl('const')" class="px-2 py-1 bg-slate-100 text-[10px] font-semibold text-slate-600 rounded-md hover:bg-slate-200">Preset Konstruksi</button>
+                                <button type="button" onclick="setPresetImageUrl('finish')" class="px-2 py-1 bg-slate-100 text-[10px] font-semibold text-slate-600 rounded-md hover:bg-slate-200">Preset Selesai</button>
+                            </div>
+                        </div>
+
+                        <div class="space-y-1.5">
+                            <label for="admin-tag" class="text-xs text-slate-500 font-bold">Status Tag Progres</label>
+                            <select id="admin-tag" class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 text-slate-800">
+                                <option value="progres">Sedang Dibangun (Tag Kuning)</option>
+                                <option value="finish">Sudah Selesai (Tag Hijau)</option>
+                            </select>
+                        </div>
+
+                        <div class="flex gap-2 pt-2">
+                            <button onclick="saveAdminPhoto()" class="flex-1 py-3 bg-brand-600 hover:bg-brand-700 text-white font-bold rounded-xl text-xs transition-all shadow-md">
+                                <span id="admin-save-btn">Simpan Foto Baru</span>
+                            </button>
+                            <button onclick="resetAdminForm()" class="px-4 py-3 bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold rounded-xl text-xs transition-all">
+                                Batal
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Database Management & Copy Code -->
+                    <div class="lg:col-span-7 space-y-4 border-t lg:border-t-0 lg:border-l lg:pl-8 pt-6 lg:pt-0">
+                        <div class="flex items-center justify-between">
+                            <h4 class="font-bold text-slate-800 text-sm uppercase tracking-wider">Langkah Menyimpan Permanen</h4>
+                            <button onclick="exportCodeArray()" class="px-3 py-1.5 bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-[10px] rounded-lg transition-all flex items-center gap-1.5">
+                                <i class="fa-solid fa-copy"></i>
+                                <span>Salin Kode HTML Baru</span>
+                            </button>
+                        </div>
+                        <p class="text-xs text-slate-500 leading-relaxed">Saat Anda menambahkan/mengedit foto di modul ini, perubahan akan langsung diaplikasikan di preview web. Agar tersimpan selamanya, tekan tombol <strong>"Salin Kode HTML Baru"</strong> di atas, lalu timpa baris variabel <code>const GALLERY_ITEMS</code> pada script paling bawah file HTML Anda.</p>
+                        
+                        <!-- List of current editable photos -->
+                        <div class="space-y-2 max-h-[280px] overflow-y-auto pr-2" id="admin-item-list">
+                            <!-- Dynamic edit/delete list items populated by JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gallery filters -->
+            <div class="flex flex-wrap items-center justify-center gap-2 mb-10">
+                <button onclick="filterGallery('all')" class="gallery-filter-btn px-5 py-2.5 rounded-xl text-xs font-bold bg-brand-600 text-white transition-all" id="gal-all">Semua Foto</button>
+                <button onclick="filterGallery('finish')" class="gallery-filter-btn px-5 py-2.5 rounded-xl text-xs font-bold bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 transition-all" id="gal-finish">Sudah Selesai</button>
+                <button onclick="filterGallery('progres')" class="gallery-filter-btn px-5 py-2.5 rounded-xl text-xs font-bold bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 transition-all" id="gal-progres">Sedang Dibangun</button>
+            </div>
+
+            <!-- Gallery Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="gallery-grid">
+                <!-- Javascript will load gallery items securely -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: Kontak & Maps -->
+    <section id="kontak" class="py-24 bg-slate-900 text-white scroll-mt-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
+                
+                <!-- Left: Contact Details & Map Info -->
+                <div class="lg:col-span-5 space-y-8">
+                    <div class="space-y-3">
+                        <span class="text-sm font-bold text-brand-400 uppercase tracking-widest block">Hubungi Tim Marketing</span>
+                        <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">Mari Konsultasikan Kebutuhan Anda</h2>
+                        <p class="text-slate-400 text-sm">Konsultasi gratis, kunjungan lokasi proyek, atau simulasi cicilan langsung dibantu marketing executive kami 24/7.</p>
+                    </div>
+
+                    <!-- Contact Channels -->
+                    <div class="space-y-6">
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-xl bg-brand-500/10 text-brand-400 flex items-center justify-center shrink-0"><i class="fa-solid fa-map-location-dot"></i></div>
+                            <div>
+                                <h4 class="font-bold text-sm text-slate-200">Kantor Pemasaran Pusat (Sleman)</h4>
+                                <p class="text-xs text-slate-400 mt-1">Jl. Turgo, Sinduharjo, Ngaglik, Sleman, D.I. Yogyakarta 55581</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-xl bg-brand-500/10 text-brand-400 flex items-center justify-center shrink-0"><i class="fa-solid fa-house-flag"></i></div>
+                            <div>
+                                <h4 class="font-bold text-sm text-slate-200">Kantor Pemasaran Cabang (Bogor)</h4>
+                                <p class="text-xs text-slate-400 mt-1">Kawasan Kemang, Bogor Regency, Jawa Barat 16310</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-xl bg-brand-500/10 text-brand-400 flex items-center justify-center shrink-0"><i class="fa-solid fa-phone"></i></div>
+                            <div>
+                                <h4 class="font-bold text-sm text-slate-200">Telepon & WhatsApp</h4>
+                                <p class="text-xs text-slate-400 mt-1">0274-4361589 / +62 895-3590-48761</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-xl bg-brand-500/10 text-brand-400 flex items-center justify-center shrink-0"><i class="fa-solid fa-envelope"></i></div>
+                            <div>
+                                <h4 class="font-bold text-sm text-slate-200">Alamat Email Resmi</h4>
+                                <p class="text-xs text-slate-400 mt-1">admin@cbcproperty.co.id / adm.cbcpro@gmail.com</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Interactive Map Container -->
+                    <div class="space-y-2">
+                        <span class="text-xs text-slate-400 font-bold uppercase tracking-wider block">Lokasi Geografis Sleman Office:</span>
+                        <div id="map" class="w-full h-48 rounded-2xl border border-slate-800 shadow-lg relative overflow-hidden z-20"></div>
+                    </div>
+                </div>
+
+                <!-- Right: Active Direct Contact Message Form -->
+                <div class="lg:col-span-7 bg-slate-800/60 border border-slate-800 p-6 sm:p-10 rounded-3xl shadow-xl space-y-6">
+                    <h3 class="text-xl font-bold text-white flex items-center gap-2"><i class="fa-solid fa-paper-plane text-brand-400"></i> Kirim Pesan Langsung</h3>
+                    
+                    <form id="contact-form" onsubmit="handleContactSubmit(event)" class="space-y-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div class="space-y-1.5">
+                                <label for="form-name" class="text-xs text-slate-300 font-semibold">Nama Lengkap</label>
+                                <input type="text" id="form-name" required placeholder="Contoh: Budi Santoso" class="w-full px-4 py-3 bg-slate-900 border border-slate-700/50 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 text-white placeholder-slate-500">
+                            </div>
+                            <div class="space-y-1.5">
+                                <label for="form-whatsapp" class="text-xs text-slate-300 font-semibold">Nomor WhatsApp / HP</label>
+                                <input type="tel" id="form-whatsapp" required placeholder="Contoh: 0812XXXXXXXX" class="w-full px-4 py-3 bg-slate-900 border border-slate-700/50 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 text-white placeholder-slate-500">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div class="space-y-1.5">
+                                <label for="form-interest" class="text-xs text-slate-300 font-semibold">Minat Unit Properti</label>
+                                <select id="form-interest" class="w-full px-4 py-3 bg-slate-900 border border-slate-700/50 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 text-white appearance-none">
+                                    <option value="Tanya Umum">Tanya Umum / Konsultasi Bebas</option>
+                                    <option value="Kemang Verde Residence">Kemang Verde Residence (Kemang)</option>
+                                    <option value="Areum Parc Luxury">Areum Parc Luxury (Kemang)</option>
+                                    <option value="Taman Pagelaran Ciomas">Taman Pagelaran Ciomas (Ciomas)</option>
+                                    <option value="Nanggela Hill's Residence">Nanggela Hill's Residence (Bojonggede)</option>
+                                    <option value="Grand Cibinong Estate">Grand Cibinong Estate (Cibinong)</option>
+                                    <option value="KGI Kemang Premium">KGI Kemang Premium (Kemang)</option>
+                                </select>
+                            </div>
+                            <div class="space-y-1.5">
+                                <label for="form-payment" class="text-xs text-slate-300 font-semibold">Rencana Skema Bayar</label>
+                                <select id="form-payment" class="w-full px-4 py-3 bg-slate-900 border border-slate-700/50 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 text-white appearance-none">
+                                    <option value="KPR Syariah / Konvensional">KPR Syariah / Konvensional</option>
+                                    <option value="Cash Bertahap">Cash Bertahap (Langsung Developer)</option>
+                                    <option value="Cash Keras">Cash Keras (Diskon Spesial)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="space-y-1.5">
+                            <label for="form-message" class="text-xs text-slate-300 font-semibold">Pesan / Pertanyaan Detail</label>
+                            <textarea id="form-message" rows="4" required placeholder="Tuliskan pertanyaan spesifik Anda, misal: 'Saya ingin survey lokasi hari Sabtu ini apakah bisa?'" class="w-full px-4 py-3 bg-slate-900 border border-slate-700/50 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 text-white placeholder-slate-500"></textarea>
+                        </div>
+
+                        <div class="pt-2">
+                            <button type="submit" class="w-full py-4 bg-brand-600 hover:bg-brand-700 text-white font-bold text-sm rounded-xl transition-all shadow-lg shadow-brand-600/15 flex items-center justify-center gap-2">
+                                <i class="fa-brands fa-whatsapp text-lg"></i>
+                                <span>Kirim Form via WhatsApp</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="bg-slate-950 text-slate-400 text-sm py-12 border-t border-slate-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+                <!-- Brand Profile -->
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-accent-500 flex items-center justify-center text-white font-bold text-xl">
+                            C
+                        </div>
+                        <div class="flex flex-col">
+                            <span class="font-extrabold text-white text-lg tracking-tight leading-none">PT CBC PROPERTY</span>
+                            <span class="text-xs text-brand-500 font-semibold tracking-wider uppercase mt-1">Property Development</span>
+                        </div>
+                    </div>
+                    <p class="text-xs text-slate-400 leading-relaxed">Penyedia hunian modern berorientasi masa depan yang ramah lingkungan, kokoh, dan berlegalitas clear sejak 2014.</p>
+                </div>
+
+                <!-- Navigation Quick Links -->
+                <div class="space-y-4">
+                    <h4 class="text-slate-200 font-bold text-xs uppercase tracking-widest">Tautan Navigasi</h4>
+                    <ul class="space-y-2.5 text-xs">
+                        <li><a href="#home" class="hover:text-brand-400 transition-colors">Beranda</a></li>
+                        <li><a href="#tentang" class="hover:text-brand-400 transition-colors">Tentang Kami</a></li>
+                        <li><a href="#unit" class="hover:text-brand-400 transition-colors">Unit Properti</a></li>
+                        <li><a href="#keunggulan" class="hover:text-brand-400 transition-colors">Keunggulan Layanan</a></li>
+                        <li><a href="#galeri" class="hover:text-brand-400 transition-colors">Progres Galeri</a></li>
+                    </ul>
+                </div>
+
+                <!-- Project Locations -->
+                <div class="space-y-4">
+                    <h4 class="text-slate-200 font-bold text-xs uppercase tracking-widest">Cakupan Wilayah Proyek</h4>
+                    <ul class="space-y-2.5 text-xs">
+                        <li><span class="hover:text-brand-400 transition-colors">Kemang (Kab. Bogor)</span></li>
+                        <li><span class="hover:text-brand-400 transition-colors">Ciomas (Kab. Bogor)</span></li>
+                        <li><span class="hover:text-brand-400 transition-colors">Bojonggede (Kab. Bogor)</span></li>
+                        <li><span class="hover:text-brand-400 transition-colors">Cibinong (Kota/Pemda Bogor)</span></li>
+                        <li><span class="hover:text-brand-400 transition-colors">Sleman (D.I. Yogyakarta)</span></li>
+                    </ul>
+                </div>
+
+                <!-- Operational & Social media -->
+                <div class="space-y-4">
+                    <h4 class="text-slate-200 font-bold text-xs uppercase tracking-widest">Waktu Operasional</h4>
+                    <p class="text-xs text-slate-400">Senin - Jumat: 08:00 - 17:00 WIB<br>Sabtu - Minggu: 09:00 - 15:00 (Hanya Survey Lokasi)</p>
+                    <!-- Social Media Handles -->
+                    <div class="flex gap-3 pt-2">
+                        <a href="#" class="w-8 h-8 rounded-lg bg-slate-900 hover:bg-brand-600 text-white flex items-center justify-center transition-all"><i class="fa-brands fa-facebook-f text-xs"></i></a>
+                        <a href="https://www.instagram.com" target="_blank" class="w-8 h-8 rounded-lg bg-slate-900 hover:bg-brand-600 text-white flex items-center justify-center transition-all"><i class="fa-brands fa-instagram text-xs"></i></a>
+                        <a href="#" class="w-8 h-8 rounded-lg bg-slate-900 hover:bg-brand-600 text-white flex items-center justify-center transition-all"><i class="fa-brands fa-tiktok text-xs"></i></a>
+                        <a href="https://wa.me/62895359048761" target="_blank" class="w-8 h-8 rounded-lg bg-slate-900 hover:bg-brand-600 text-white flex items-center justify-center transition-all"><i class="fa-brands fa-whatsapp text-xs"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-slate-900 pt-8 flex flex-col sm:flex-row justify-between items-center text-xs text-slate-500 gap-4">
+                <p>&copy; 2026 PT CBC PROPERTY. Hak Cipta Dilindungi.</p>
+                <div class="flex gap-4">
+                    <a href="#" class="hover:text-slate-300">Syarat & Ketentuan</a>
+                    <a href="#" class="hover:text-slate-300">Kebijakan Privasi</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Quick Actions -->
+    <a href="https://wa.me/62895359048761?text=Halo%20PT%20CBC%20PROPERTY" target="_blank" class="fixed bottom-6 right-6 z-40 w-14 h-14 bg-emerald-500 text-white rounded-full flex items-center justify-center shadow-2xl hover:bg-emerald-600 transition-transform hover:scale-110" title="Hubungi via WhatsApp">
+        <i class="fa-brands fa-whatsapp text-2xl"></i>
+    </a>
+
+    <!-- Custom Elegant In-App Toast System -->
+    <div id="toast-container" class="fixed bottom-6 left-6 z-50 flex flex-col gap-3 pointer-events-none"></div>
+
+    <!-- Property Detail Modal -->
+    <div id="property-modal" class="fixed inset-0 bg-slate-950/70 z-50 flex items-center justify-center p-4 backdrop-blur-xs hidden opacity-0 transition-opacity duration-300">
+        <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl relative border border-slate-100 transform scale-95 transition-transform duration-300" id="property-modal-content">
+            <!-- Modal Body injected securely by JS -->
+        </div>
+    </div>
+
+
+    <!-- SCRIPT SECTION WITH HIGH SECURITY STANDARDS -->
+    <script>
+        
+        /******************************************************************
+         * SECURITY LAYER: INPUT SANITIZATION & PROTOCOL CHECK (Anti-XSS & Anti-Deface)
+         ******************************************************************/
+        
+        // Sanitize static strings/inputs to prevent injection of malicious script blocks
+        function sanitizeHTML(str) {
+            if (!str) return '';
+            return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#039;');
+        }
+
+        // Validate image URL protocols to prevent dangerous javascript: protocol injections
+        function sanitizeUrl(url) {
+            if (!url) return '';
+            const trimmed = url.trim();
+            // Allow only http:// and https:// protocols
+            if (trimmed.startsWith('http://') || trimmed.startsWith('https://')) {
+                return trimmed;
+            }
+            // Defend by returning a secure default placeholder image
+            return 'https://placehold.co/800x600/eceff1/37474f?text=Invalid+Image+Protocol';
+        }
+
+        /******************************************************************
+         * SECURITY LAYER: SHA-256 PASSWORD HASH VERIFICATION
+         ******************************************************************/
+        // SHA-256 hash value of our default password: "admin123"
+        const SECURE_ADMIN_HASH = "240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9";
+
+        // Generate SHA-256 string hash using secure native Web Crypto API
+        async function hashStringSHA256(message) {
+            const msgBuffer = new TextEncoder().encode(message);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+            return hashHex;
+        }
+
+        // Check if user session has been authenticated before
+        function isAdminSessionActive() {
+            return sessionStorage.getItem('tra_admin_auth') === 'true';
+        }
+
+        // Handles the click on the toggle admin panel button
+        function handleAdminBtnClick() {
+            if (isAdminSessionActive()) {
+                // If already authenticated, just toggle the layout view
+                const panel = document.getElementById('admin-panel');
+                if (panel.classList.contains('hidden')) {
+                    panel.classList.remove('hidden');
+                    renderAdminList();
+                    showToast("Panel editor foto dibuka.");
+                } else {
+                    panel.classList.add('hidden');
+                    resetAdminForm();
+                }
+            } else {
+                // Open secure authorization modal gateway
+                openAuthModal();
+            }
+        }
+
+        // Open Auth modal view
+        function openAuthModal() {
+            const modal = document.getElementById('auth-modal');
+            modal.classList.remove('hidden');
+            document.getElementById('admin-passcode-input').value = ""; // Clear input
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                modal.classList.add('opacity-100');
+                document.getElementById('auth-modal-content').classList.remove('scale-95');
+                document.getElementById('auth-modal-content').classList.add('scale-100');
+                document.getElementById('admin-passcode-input').focus();
+            }, 50);
+        }
+
+        function closeAuthModal() {
+            const modal = document.getElementById('auth-modal');
+            modal.classList.add('opacity-0');
+            modal.classList.remove('opacity-100');
+            document.getElementById('auth-modal-content').classList.add('scale-95');
+            document.getElementById('auth-modal-content').classList.remove('scale-100');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        // Securely verifies the input passcode against stored hash
+        async function verifyPasscode() {
+            const passwordInput = document.getElementById('admin-passcode-input').value;
+            if (!passwordInput) {
+                showToast("Masukkan kata sandi terlebih dahulu!");
+                return;
+            }
+
+            // High Security: compute SHA-256 hash of the input
+            const hashedInput = await hashStringSHA256(passwordInput);
+
+            if (hashedInput === SECURE_ADMIN_HASH) {
+                // Authentication Success
+                sessionStorage.setItem('tra_admin_auth', 'true');
+                showToast("Autentikasi Berhasil! Modul Editor Terbuka.");
+                
+                // Adjust UI Elements
+                document.getElementById('btn-admin-gate').className = "px-5 py-2.5 rounded-xl text-xs font-bold bg-emerald-600 hover:bg-emerald-700 text-white flex items-center gap-2 shadow-md transition-all";
+                document.getElementById('icon-admin-gate').className = "fa-solid fa-lock-open";
+                document.getElementById('admin-gate-text').innerText = "Tutup Modul Editor Foto";
+                document.getElementById('btn-admin-logout').classList.remove('hidden');
+                
+                closeAuthModal();
+                
+                // Show admin panel
+                const panel = document.getElementById('admin-panel');
+                panel.classList.remove('hidden');
+                renderAdminList();
+            } else {
+                // Authentication Failed
+                showToast("🚨 Akses ditolak! Kata sandi salah.");
+            }
+        }
+
+        // Clear Admin Sessional Tokens
+        function logoutAdmin() {
+            sessionStorage.removeItem('tra_admin_auth');
+            document.getElementById('admin-panel').classList.add('hidden');
+            document.getElementById('btn-admin-gate').className = "px-5 py-2.5 rounded-xl text-xs font-bold bg-slate-800 hover:bg-slate-900 text-white flex items-center gap-2 shadow-md transition-all";
+            document.getElementById('icon-admin-gate').className = "fa-solid fa-lock";
+            document.getElementById('admin-gate-text').innerText = "Buka Modul Editor Foto";
+            document.getElementById('btn-admin-logout').classList.add('hidden');
+            resetAdminForm();
+            showToast("Sesi Admin telah dinonaktifkan (Logged Out).");
+        }
+
+        /* Properti Database */
+        const PROPERTIES = [
+            {
+                id: "p1",
+                name: "Kemang Verde Residence",
+                location: "kemang",
+                locationName: "Kemang, Bogor",
+                price: 395000000,
+                priceDisplay: "Rp 395 Juta",
+                monthlyEst: "Rp 2,8 Jt/bln",
+                type: "Minimalis Mezzanine",
+                lt: 60,
+                lb: 36,
+                beds: 2,
+                baths: 1,
+                legal: "SHM & PBG Ready",
+                image: "https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=800&q=80",
+                desc: "Kemang Verde Residence menawarkan konsep hunian mezzanine eksklusif dengan harga terjangkau. Memiliki sirkulasi udara optimal dan pencahayaan matahari alami yang melimpah.",
+                features: ["Double Dinding Hebel", "Plafond Gypsum", "Sumur Bor Pompa Air", "Listrik 1300 Watt", "Taman Belakang"]
+            },
+            {
+                id: "p2",
+                name: "Areum Parc Luxury",
+                location: "kemang",
+                locationName: "Kemang, Bogor",
+                price: 750000000,
+                priceDisplay: "Rp 750 Juta",
+                monthlyEst: "Rp 5,1 Jt/bln",
+                type: "Scandinavian Mezzanine",
+                lt: 72,
+                lb: 55,
+                beds: 3,
+                baths: 2,
+                legal: "SHM Clear",
+                image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80",
+                desc: "Hunian berkonsep Scandinavian Modern dengan fitur smart home terintegrasi. Lingkungan asri yang aman dengan keamanan satu pintu (one gate system) 24 jam.",
+                features: ["Smart Door Lock", "Smart Lighting Switch", "CCTV Lingkungan", "Pondasi Cakar Ayam", "Carport 2 Mobil"]
+            },
+            {
+                id: "p3",
+                name: "Taman Pagelaran Ciomas",
+                location: "ciomas",
+                locationName: "Ciomas, Bogor",
+                price: 1500000000,
+                priceDisplay: "Rp 1.5 Milyar",
+                monthlyEst: "Rp 10,2 Jt/bln",
+                type: "Classic Modern 2 Lantai",
+                lt: 126,
+                lb: 108,
+                beds: 4,
+                baths: 3,
+                legal: "SHM & IMB Ready",
+                image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
+                desc: "Sempurna untuk keluarga besar, perumahan di Ciomas ini menawarkan bangunan megah 2 lantai dengan material premium marmer lantai bawah, sirkulasi angin sejuk pegunungan.",
+                features: ["Lantai Granite 60x60", "Kusen Aluminium", "Pipa Air Panas Mandi", "Taman Luas Depan Belakang", "Balkon Atas"]
+            },
+            {
+                id: "p4",
+                name: "Nanggela Hill's Residence",
+                location: "bojonggede",
+                locationName: "Bojonggede, Bogor",
+                price: 450000000,
+                priceDisplay: "Rp 450 Juta",
+                monthlyEst: "Rp 3,2 Jt/bln",
+                type: "Industrial Concept",
+                lt: 70,
+                lb: 45,
+                beds: 2,
+                baths: 1,
+                legal: "SHM Tersedia",
+                image: "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=800&q=80",
+                desc: "Rumah berdesain Industrial Minimalis dengan fasad modern batu alam ekspos. Hanya berjarak 10 menit dari Stasiun KRL Bojonggede dan dekat pusat belanja Pemda Cibinong.",
+                features: ["Pondasi Batu Kali", "Kabel Listrik Tanam", "Dinding Hebel", "Rangka Atap Baja Ringan", "Atap Genteng Flat Metal"]
+            },
+            {
+                id: "p5",
+                name: "Grand Cibinong Estate",
+                location: "cibinong",
+                locationName: "Cibinong, Bogor",
+                price: 620000000,
+                priceDisplay: "Rp 620 Juta",
+                monthlyEst: "Rp 4,3 Jt/bln",
+                type: "Modern Cluster",
+                lt: 72,
+                lb: 36,
+                beds: 2,
+                baths: 2,
+                legal: "SHM Pecah",
+                image: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=800&q=80",
+                desc: "Hunian strategis dekat dengan kawasan Pusat Pemerintahan Bogor (Pemda). Cluster premium bernilai investasi tinggi, dengan sistem air bersih mandiri.",
+                features: ["Keamanan 24 Jam", "Sistem Selokan Tertutup", "Instalasi AC di Setiap Kamar", "Sanitary Kloset Duduk Toto", "Dekat Rumah Sakit"]
+            },
+            {
+                id: "p6",
+                name: "KGI Kemang Premium",
+                location: "kemang",
+                locationName: "Kemang, Bogor",
+                price: 890000000,
+                priceDisplay: "Rp 890 Juta",
+                monthlyEst: "Rp 6,1 Jt/bln",
+                type: "Smart Home Mezzanine",
+                lt: 90,
+                lb: 65,
+                beds: 3,
+                baths: 2,
+                legal: "SHM & PBG Lengkap",
+                image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80",
+                desc: "Cluster premium KGI Kemang menawarkan rumah dengan konsep modern berplafon tinggi. Memungkinkan perluasan mezzanine lanjutan untuk ruang kerja atau kamar bermain anak.",
+                features: ["Sistem Autogate Kompleks", "Listrik 2200 Watt", "High Ceiling 4.5 Meter", "Dapur Minimalis Kitchen Island", "Kabel Fiber Optik Internet"]
+            }
+        ];
+
+        /* Gallery Database Array - Protected with manual validation & sanitized outputs */
+        let GALLERY_ITEMS = [
+            { id: "g1", type: "finish", title: "Fasad Utama Areum Parc", desc: "Selesai 100% - Serah terima unit", image: "https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=800&q=80" },
+            { id: "g2", type: "progres", title: "Pengecoran Pondasi KGI Kemang", desc: "Tahap struktur beton & tiang pancang", image: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=800&q=80" },
+            { id: "g3", type: "finish", title: "Interior Ruang Tamu Nanggela Hill's", desc: "Desain custom bergaya industrial", image: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=800&q=80" },
+            { id: "g4", type: "progres", title: "Plester Dinding Cluster Ciomas", desc: "Tahap acian dan plester hebel ganda", image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80" },
+            { id: "g5", type: "finish", title: "Master Bedroom Grand Cibinong", desc: "Selesai pengerjaan interior & wardrobe", image: "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?auto=format&fit=crop&w=800&q=80" },
+            { id: "g6", type: "progres", title: "Pemasangan Atap Baja Ringan", desc: "Pemasangan baja ringan bergaransi SNI", image: "https://images.unsplash.com/photo-1581094288338-2314dddb7eed?auto=format&fit=crop&w=800&q=80" }
+        ];
+
+        let currentGalleryFilter = 'all';
+        let mapInstance = null;
+
+        window.onload = function() {
+            renderProperties(PROPERTIES);
+            renderGallery(GALLERY_ITEMS);
+            initLeafletMap();
+
+            // Sessional UI Restoration: Check if admin has logged in during past tabs
+            if (isAdminSessionActive()) {
+                document.getElementById('btn-admin-gate').className = "px-5 py-2.5 rounded-xl text-xs font-bold bg-emerald-600 hover:bg-emerald-700 text-white flex items-center gap-2 shadow-md transition-all";
+                document.getElementById('icon-admin-gate').className = "fa-solid fa-lock-open";
+                document.getElementById('admin-gate-text').innerText = "Tutup Modul Editor Foto";
+                document.getElementById('btn-admin-logout').classList.remove('hidden');
+            }
+
+            // Sticky Navigation Animation
+            window.addEventListener('scroll', function() {
+                const header = document.getElementById('main-header');
+                if (window.scrollY > 50) {
+                    header.classList.add('glassmorphism', 'shadow-lg');
+                } else {
+                    header.classList.remove('glassmorphism', 'shadow-lg');
+                }
+            });
+
+            // Mobile menu toggle
+            const btnMobileMenu = document.getElementById('btn-mobile-menu');
+            const mobileMenuContainer = document.getElementById('mobile-menu-container');
+            const iconMobileMenu = document.getElementById('icon-mobile-menu');
+
+            btnMobileMenu.addEventListener('click', () => {
+                const isHidden = mobileMenuContainer.classList.contains('hidden');
+                if(isHidden) {
+                    mobileMenuContainer.classList.remove('hidden');
+                    iconMobileMenu.className = "fa-solid fa-xmark text-2xl";
+                } else {
+                    mobileMenuContainer.classList.add('hidden');
+                    iconMobileMenu.className = "fa-solid fa-bars text-2xl";
+                }
+            });
+
+            // Close mobile menu on click nav links
+            const mobileLinks = mobileMenuContainer.querySelectorAll('a');
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenuContainer.classList.add('hidden');
+                    iconMobileMenu.className = "fa-solid fa-bars text-2xl";
+                });
+            });
+        }
+
+        /* Render Property Cards */
+        function renderProperties(list) {
+            const grid = document.getElementById('properties-grid');
+            const fallback = document.getElementById('no-properties-fallback');
+            grid.innerHTML = "";
+
+            if (list.length === 0) {
+                fallback.classList.remove('hidden');
+                grid.classList.add('hidden');
+                return;
+            }
+
+            fallback.classList.add('hidden');
+            grid.classList.remove('hidden');
+
+            list.forEach(prop => {
+                const card = document.createElement('div');
+                card.className = "bg-white border border-slate-100 rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 flex flex-col group";
+                
+                // Securely sanitized variables to prevent HTML Injection
+                const safeName = sanitizeHTML(prop.name);
+                const safeType = sanitizeHTML(prop.type);
+                const safeLocation = sanitizeHTML(prop.locationName);
+                const safeLegal = sanitizeHTML(prop.legal);
+                const safeDesc = sanitizeHTML(prop.desc);
+                const safeMonthlyEst = sanitizeHTML(prop.monthlyEst);
+                const safePriceDisplay = sanitizeHTML(prop.priceDisplay);
+                const safeImageUrl = sanitizeUrl(prop.image);
+
+                card.innerHTML = `
+                    <div class="relative overflow-hidden h-56 shrink-0">
+                        <img src="${safeImageUrl}" alt="${safeName}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.onerror=null; this.src='https://placehold.co/600x400/eceff1/37474f?text=Foto+TRA'">
+                        <span class="absolute top-4 left-4 px-3 py-1 bg-brand-600 text-white font-bold text-xs rounded-lg shadow-sm">${safeType}</span>
+                        <span class="absolute bottom-4 right-4 px-3 py-1 bg-slate-900/80 text-white font-semibold text-xs rounded-lg backdrop-blur-xs"><i class="fa-solid fa-map-pin mr-1 text-accent-500"></i> ${safeLocation}</span>
+                    </div>
+
+                    <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+                        <div class="space-y-2">
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs text-brand-600 font-bold tracking-wide uppercase flex items-center gap-1">
+                                    <i class="fa-solid fa-shield-halved text-[10px]"></i> ${safeLegal}
+                                </span>
+                                <span class="text-xs text-slate-400 font-medium">Cicilan Mulai ${safeMonthlyEst}</span>
+                            </div>
+                            <h3 class="font-extrabold text-slate-900 text-lg sm:text-xl group-hover:text-brand-600 transition-colors">${safeName}</h3>
+                            <p class="text-xs text-slate-500 line-clamp-2">${safeDesc}</p>
+                        </div>
+
+                        <div class="grid grid-cols-3 gap-2 py-3 border-t border-b border-slate-100 text-xs text-slate-600">
+                            <div class="flex items-center gap-1.5" title="Luas Tanah">
+                                <i class="fa-solid fa-maximize text-slate-400"></i>
+                                <span>LT: ${prop.lt} m²</span>
+                            </div>
+                            <div class="flex items-center gap-1.5" title="Luas Bangunan">
+                                <i class="fa-solid fa-house-chimney text-slate-400"></i>
+                                <span>LB: ${prop.lb} m²</span>
+                            </div>
+                            <div class="flex items-center gap-1.5" title="Kamar">
+                                <i class="fa-solid fa-bed text-slate-400"></i>
+                                <span>${prop.beds}KT / ${prop.baths}KM</span>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center justify-between pt-2">
+                            <div class="flex flex-col">
+                                <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Mulai Dari</span>
+                                <span class="text-lg font-extrabold text-slate-900">${safePriceDisplay}</span>
+                            </div>
+                            <div class="flex gap-2">
+                                <button onclick="openPropertyDetail('${safeName}')" class="px-3.5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs rounded-xl transition-all" title="Detail Unit">
+                                    Detail
+                                </button>
+                                <button onclick="bookingProperty('${safeName}')" class="px-4 py-2.5 bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs rounded-xl transition-all flex items-center gap-1.5 shadow-sm shadow-brand-600/10">
+                                    <i class="fa-solid fa-bookmark text-[10px]"></i>
+                                    <span>Pesan</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        /* Filter properties by top buttons */
+        function filterCategory(category) {
+            const buttons = document.querySelectorAll('.category-btn');
+            buttons.forEach(btn => {
+                btn.className = "category-btn px-5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 bg-white text-slate-600 hover:bg-slate-100 border border-slate-200";
+            });
+
+            const activeBtn = document.getElementById(`cat-${category}`);
+            if (activeBtn) {
+                activeBtn.className = "category-btn px-5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 bg-brand-600 text-white";
+            }
+
+            if (category === 'all') {
+                renderProperties(PROPERTIES);
+            } else {
+                const filtered = PROPERTIES.filter(p => p.location === category);
+                renderProperties(filtered);
+            }
+        }
+
+        /* Search bar filter engine */
+        function handleFilterSearch() {
+            const locVal = document.getElementById('search-location').value;
+            const priceVal = document.getElementById('search-price').value;
+            const roomsVal = document.getElementById('search-rooms').value;
+
+            let filtered = PROPERTIES;
+
+            if (locVal) {
+                filtered = filtered.filter(p => p.location === locVal);
+            }
+            if (priceVal) {
+                const maxPrice = parseInt(priceVal);
+                filtered = filtered.filter(p => p.price <= maxPrice);
+            }
+            if (roomsVal) {
+                const minRooms = parseInt(roomsVal);
+                filtered = filtered.filter(p => p.beds >= minRooms);
+            }
+
+            renderProperties(filtered);
+            showToast("Hasil pencarian properti disaring!");
+            document.getElementById('unit').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        /* Render Progress Gallery Items */
+        function renderGallery(items) {
+            const grid = document.getElementById('gallery-grid');
+            grid.innerHTML = "";
+
+            // Apply current filtering state
+            const filteredItems = currentGalleryFilter === 'all' 
+                ? items 
+                : items.filter(g => g.type === currentGalleryFilter);
+
+            if (filteredItems.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-1 sm:col-span-2 lg:col-span-3 text-center py-12 bg-white rounded-3xl border border-dashed border-slate-200">
+                        <div class="text-4xl text-slate-300 mb-2"><i class="fa-regular fa-image"></i></div>
+                        <h4 class="font-bold text-slate-600 text-sm">Tidak Ada Foto</h4>
+                        <p class="text-xs text-slate-400 mt-1">Belum ada dokumentasi untuk kategori ini.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            filteredItems.forEach(item => {
+                const card = document.createElement('div');
+                card.className = "bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm relative group cursor-pointer hover:shadow-md transition-all duration-300";
+                
+                // XSS Defense: sanitize variables
+                const safeTitle = sanitizeHTML(item.title);
+                const safeDesc = sanitizeHTML(item.desc);
+                const safeImage = sanitizeUrl(item.image);
+                const safeType = sanitizeHTML(item.type);
+
+                card.innerHTML = `
+                    <div class="h-64 overflow-hidden relative">
+                        <img src="${safeImage}" alt="${safeTitle}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.onerror=null; this.src='https://placehold.co/600x400/eceff1/37474f?text=Foto+Progres+TRA'">
+                        <span class="absolute top-4 left-4 px-2.5 py-1 text-[10px] font-extrabold uppercase tracking-wide rounded-lg text-white ${safeType === 'finish' ? 'bg-emerald-600 shadow-md' : 'bg-amber-500 shadow-md'}">${safeType === 'finish' ? 'Sudah Selesai' : 'Sedang Dibangun'}</span>
+                    </div>
+                    <div class="p-4 bg-white border-t border-slate-50">
+                        <h4 class="font-bold text-slate-900 text-sm group-hover:text-brand-600 transition-colors">${safeTitle}</h4>
+                        <p class="text-xs text-slate-500 mt-0.5">${safeDesc}</p>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        /* Filter gallery items by finish/progres tags */
+        function filterGallery(type) {
+            currentGalleryFilter = type;
+            const buttons = document.querySelectorAll('.gallery-filter-btn');
+            buttons.forEach(btn => {
+                btn.className = "gallery-filter-btn px-5 py-2.5 rounded-xl text-xs font-bold bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 transition-all";
+            });
+
+            const activeBtn = document.getElementById(`gal-${type}`);
+            if (activeBtn) {
+                activeBtn.className = "gallery-filter-btn px-5 py-2.5 rounded-xl text-xs font-bold bg-brand-600 text-white transition-all";
+            }
+
+            renderGallery(GALLERY_ITEMS);
+        }
+
+        /* Preset Images helper to make simulating easy */
+        function setPresetImageUrl(type) {
+            const input = document.getElementById('admin-image');
+            if (type === 'const') {
+                input.value = "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=800&q=80";
+            } else {
+                input.value = "https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=800&q=80";
+            }
+        }
+
+        /* Render list of existing images in the editor area */
+        function renderAdminList() {
+            const listContainer = document.getElementById('admin-item-list');
+            listContainer.innerHTML = "";
+
+            GALLERY_ITEMS.forEach((item, index) => {
+                const safeTitle = sanitizeHTML(item.title);
+                const safeImage = sanitizeUrl(item.image);
+                const tagLabel = item.type === 'finish' ? 'Sudah Selesai' : 'Sedang Dibangun';
+                const tagColor = item.type === 'finish' ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800';
+                
+                const row = document.createElement('div');
+                row.className = "flex items-center justify-between p-3 bg-slate-50 border border-slate-100 rounded-2xl text-xs gap-4";
+                row.innerHTML = `
+                    <div class="flex items-center gap-3 truncate">
+                        <img src="${safeImage}" class="w-10 h-10 rounded-lg object-cover bg-slate-200 shrink-0" onerror="this.onerror=null; this.src='https://placehold.co/100x100/eceff1/37474f?text=Foto'">
+                        <div class="truncate">
+                            <h5 class="font-bold text-slate-800 truncate">${safeTitle}</h5>
+                            <span class="px-1.5 py-0.5 rounded-md text-[9px] font-bold uppercase ${tagColor}">${tagLabel}</span>
+                        </div>
+                    </div>
+                    <div class="flex gap-1.5 shrink-0">
+                        <button onclick="editAdminPhoto('${item.id}')" class="p-2 text-slate-500 hover:text-brand-600 hover:bg-white rounded-lg border border-transparent hover:border-slate-200 transition-all" title="Edit Data">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </button>
+                        <button onclick="deleteAdminPhoto('${item.id}')" class="p-2 text-slate-400 hover:text-red-500 hover:bg-white rounded-lg border border-transparent hover:border-slate-200 transition-all" title="Hapus Foto">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </button>
+                    </div>
+                `;
+                listContainer.appendChild(row);
+            });
+        }
+
+        /* Save New Photo or Updated Photo to Local memory array with Sanitization & Auth checks */
+        function saveAdminPhoto() {
+            // SECURITY: Double check authentication status before performing array action
+            if (!isAdminSessionActive()) {
+                showToast("🚨 Tindakan ditolak! Sesi admin tidak valid.");
+                logoutAdmin();
+                return;
+            }
+
+            // Limit lengths & sanitize inputs
+            const titleInput = document.getElementById('admin-title').value.trim();
+            const descInput = document.getElementById('admin-desc').value.trim();
+            const imageInput = document.getElementById('admin-image').value.trim();
+            const tagInput = document.getElementById('admin-tag').value;
+            const editId = document.getElementById('admin-photo-id').value;
+
+            if(!titleInput || !descInput) {
+                showToast("Mohon lengkapi judul dan deskripsi foto!");
+                return;
+            }
+
+            // Defuse XSS and sanitize protocols
+            const finalImage = imageInput ? sanitizeUrl(imageInput) : "https://placehold.co/800x600/10b981/ffffff?text=TRA+Properti+Progres";
+
+            if (editId) {
+                // Edit existing
+                const index = GALLERY_ITEMS.findIndex(g => g.id === editId);
+                if (index !== -1) {
+                    GALLERY_ITEMS[index].title = titleInput;
+                    GALLERY_ITEMS[index].desc = descInput;
+                    GALLERY_ITEMS[index].image = finalImage;
+                    GALLERY_ITEMS[index].type = tagInput;
+                    showToast("Progres foto berhasil diperbarui!");
+                }
+            } else {
+                // Add new
+                const newId = 'g_' + Date.now();
+                GALLERY_ITEMS.unshift({
+                    id: newId,
+                    type: tagInput,
+                    title: titleInput,
+                    desc: descInput,
+                    image: finalImage
+                });
+                showToast("Foto progres baru berhasil ditambahkan!");
+            }
+
+            // Refresh UI
+            renderGallery(GALLERY_ITEMS);
+            renderAdminList();
+            resetAdminForm();
+        }
+
+        /* Edit action from manager list with security clearance */
+        function editAdminPhoto(id) {
+            if (!isAdminSessionActive()) {
+                showToast("Akses ditolak!");
+                return;
+            }
+            const item = GALLERY_ITEMS.find(g => g.id === id);
+            if (!item) return;
+
+            document.getElementById('admin-photo-id').value = item.id;
+            document.getElementById('admin-title').value = item.title;
+            document.getElementById('admin-desc').value = item.desc;
+            document.getElementById('admin-image').value = item.image;
+            document.getElementById('admin-tag').value = item.type;
+
+            document.getElementById('form-title').innerText = "Edit Foto Progres";
+            document.getElementById('admin-save-btn').innerText = "Perbarui Foto";
+            
+            showToast("Data dimuat ke form editor!");
+        }
+
+        /* Delete photo from local database array with security clearance */
+        function deleteAdminPhoto(id) {
+            if (!isAdminSessionActive()) {
+                showToast("Akses ditolak!");
+                return;
+            }
+            const index = GALLERY_ITEMS.findIndex(g => g.id === id);
+            if (index !== -1) {
+                GALLERY_ITEMS.splice(index, 1);
+                renderGallery(GALLERY_ITEMS);
+                renderAdminList();
+                showToast("Foto berhasil dihapus!");
+                resetAdminForm();
+            }
+        }
+
+        /* Reset the Editor form inputs */
+        function resetAdminForm() {
+            document.getElementById('admin-photo-id').value = "";
+            document.getElementById('admin-title').value = "";
+            document.getElementById('admin-desc').value = "";
+            document.getElementById('admin-image').value = "";
+            document.getElementById('admin-tag').value = "progres";
+
+            document.getElementById('form-title').innerText = "Tambah Foto Progres Baru";
+            document.getElementById('admin-save-btn').innerText = "Simpan Foto Baru";
+        }
+
+        /* Exporter function to help developer save database array code permanently */
+        function exportCodeArray() {
+            if (!isAdminSessionActive()) {
+                showToast("Akses ditolak!");
+                return;
+            }
+            const codeString = `const GALLERY_ITEMS = ` + JSON.stringify(GALLERY_ITEMS, null, 12) + `;`;
+            
+            // Clipboard Copy via secure executive command
+            const el = document.createElement('textarea');
+            el.value = codeString;
+            document.body.appendChild(el);
+            el.select();
+            document.execCommand('copy');
+            document.body.removeChild(el);
+
+            showToast("Struktur kode database disalin ke clipboard! Tempel ke editor.");
+        }
+
+        /* Initialize Leaflet JS Map inside contact section */
+        function initLeafletMap() {
+            // Sleman Office Coordinate
+            const lat = -7.7121655;
+            const lng = 110.3957813;
+
+            try {
+                mapInstance = L.map('map', {
+                    scrollWheelZoom: false
+                }).setView([lat, lng], 13);
+
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; OpenStreetMap contributors'
+                }).addTo(mapInstance);
+
+                const customMarker = L.marker([lat, lng]).addTo(mapInstance);
+                customMarker.bindPopup("<b>PT CBC PROPERTY</b><br>Kantor Pemasaran Sleman, Yogyakarta.").openPopup();
+            } catch (error) {
+                console.log("Leaflet map failed to render inside hidden workspace context.", error);
+            }
+        }
+
+        /* Open detailed modal view for single property unit safely */
+        function openPropertyDetail(name) {
+            const prop = PROPERTIES.find(p => p.name === name);
+            if (!prop) return;
+
+            const modal = document.getElementById('property-modal');
+            const content = document.getElementById('property-modal-content');
+
+            // Sanitize property parameters securely before HTML rendering
+            const safeName = sanitizeHTML(prop.name);
+            const safeType = sanitizeHTML(prop.type);
+            const safeLocation = sanitizeHTML(prop.locationName);
+            const safeLegal = sanitizeHTML(prop.legal);
+            const safeDesc = sanitizeHTML(prop.desc);
+            const safePriceDisplay = sanitizeHTML(prop.priceDisplay);
+            const safeImage = sanitizeUrl(prop.image);
+
+            content.innerHTML = `
+                <div class="relative h-64 shrink-0">
+                    <img src="${safeImage}" alt="${safeName}" class="w-full h-full object-cover">
+                    <button onclick="closePropertyDetail()" class="absolute top-4 right-4 w-10 h-10 rounded-full bg-slate-900/80 text-white flex items-center justify-center hover:bg-slate-950 transition-colors">
+                        <i class="fa-solid fa-xmark text-lg"></i>
+                    </button>
+                    <span class="absolute bottom-4 left-4 px-3 py-1 bg-brand-600 text-white font-semibold text-xs rounded-lg">${safeType}</span>
+                </div>
+
+                <div class="p-6 sm:p-8 space-y-6">
+                    <div class="space-y-2">
+                        <span class="text-xs text-brand-600 font-bold uppercase tracking-wide flex items-center gap-1">
+                            <i class="fa-solid fa-shield-check"></i> ${safeLegal}
+                        </span>
+                        <h3 class="text-2xl font-extrabold text-slate-900">${safeName}</h3>
+                        <p class="text-xs text-slate-500 flex items-center gap-1">
+                            <i class="fa-solid fa-location-dot text-brand-500"></i> ${safeLocation}
+                        </p>
+                    </div>
+
+                    <p class="text-slate-600 text-sm leading-relaxed">${safeDesc}</p>
+
+                    <div class="space-y-3">
+                        <h4 class="font-bold text-slate-800 text-sm border-b pb-2"><i class="fa-solid fa-circle-info text-brand-600 mr-1"></i> Spesifikasi Teknis</h4>
+                        <div class="grid grid-cols-2 gap-4 text-xs">
+                            <div class="flex justify-between border-b border-slate-50 pb-2">
+                                <span class="text-slate-400">Luas Tanah (LT):</span>
+                                <span class="font-bold text-slate-800">${prop.lt} m²</span>
+                            </div>
+                            <div class="flex justify-between border-b border-slate-50 pb-2">
+                                <span class="text-slate-400">Luas Bangunan (LB):</span>
+                                <span class="font-bold text-slate-800">${prop.lb} m²</span>
+                            </div>
+                            <div class="flex justify-between border-b border-slate-50 pb-2">
+                                <span class="text-slate-400">Kamar Tidur:</span>
+                                <span class="font-bold text-slate-800">${prop.beds} Kamar Utama</span>
+                            </div>
+                            <div class="flex justify-between border-b border-slate-50 pb-2">
+                                <span class="text-slate-400">Kamar Mandi:</span>
+                                <span class="font-bold text-slate-800">${prop.baths} KM</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-3">
+                        <h4 class="font-bold text-slate-800 text-sm border-b pb-2"><i class="fa-solid fa-list-check text-brand-600 mr-1"></i> Keunggulan Spesifikasi</h4>
+                        <div class="flex flex-wrap gap-2">
+                            ${prop.features.map(f => `<span class="px-2.5 py-1.5 bg-slate-50 text-slate-700 rounded-lg text-xs font-semibold border border-slate-100 flex items-center gap-1.5"><i class="fa-solid fa-check text-emerald-500 text-[10px]"></i> ${sanitizeHTML(f)}</span>`).join('')}
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between pt-4 border-t border-slate-100">
+                        <div class="flex flex-col">
+                            <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Harga Cash Mulai</span>
+                            <span class="text-2xl font-black text-slate-900">${safePriceDisplay}</span>
+                        </div>
+                        <div class="flex gap-3">
+                            <button onclick="closePropertyDetail()" class="px-5 py-3 bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold text-xs rounded-xl transition-all">
+                                Tutup
+                            </button>
+                            <button onclick="bookingProperty('${safeName}')" class="px-6 py-3 bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs rounded-xl transition-all flex items-center gap-2 shadow-md shadow-brand-600/10">
+                                <i class="fa-brands fa-whatsapp text-sm"></i>
+                                <span>Pesan Unit Sekarang</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                modal.classList.add('opacity-100');
+                document.getElementById('property-modal-content').classList.remove('scale-95');
+                document.getElementById('property-modal-content').classList.add('scale-100');
+            }, 50);
+        }
+
+        function closePropertyDetail() {
+            const modal = document.getElementById('property-modal');
+            modal.classList.add('opacity-0');
+            modal.classList.remove('opacity-100');
+            document.getElementById('property-modal-content').classList.add('scale-95');
+            document.getElementById('property-modal-content').classList.remove('scale-100');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        /* Booking trigger logic */
+        function bookingProperty(propName) {
+            const textMsg = `Halo PT CBC PROPERTY, saya sangat tertarik memesan / survey lokasi unit properti: "${propName}". Mohon dikirimkan pricelist dan informasi lengkapnya. Terima kasih.`;
+            const waUrl = `https://wa.me/62895359048761?text=${encodeURIComponent(textMsg)}`;
+            window.open(waUrl, '_blank');
+        }
+
+        /* Form Submit Direct To WhatsApp with sanitization filter */
+        function handleContactSubmit(event) {
+            event.preventDefault();
+            const name = document.getElementById('form-name').value;
+            const phone = document.getElementById('form-whatsapp').value;
+            const interest = document.getElementById('form-interest').value;
+            const payment = document.getElementById('form-payment').value;
+            const message = document.getElementById('form-message').value;
+
+            // XSS Check: prevent sending scripts down to Whatsapp agents
+            const cleanName = sanitizeHTML(name);
+            const cleanMessage = sanitizeHTML(message);
+
+            const textMsg = `Halo PT CBC PROPERTY,\n\nSaya telah mengisi formulir minat lewat website dengan rincian berikut:\n\n- *Nama:* ${cleanName}\n- *Nomor WA:* ${phone}\n- *Minat Properti:* ${interest}\n- *Skema Bayar:* ${payment}\n- *Pesan:* ${cleanMessage}\n\nMohon diproses untuk rincian unit dan brosurnya. Terima kasih.`;
+            const waUrl = `https://wa.me/62895359048761?text=${encodeURIComponent(textMsg)}`;
+            
+            showToast("Sukses mengirimkan formulir! Mengarahkan ke WhatsApp...");
+            
+            setTimeout(() => {
+                window.open(waUrl, '_blank');
+            }, 1000);
+        }
+
+        /* Standard Modern Notification Box replacement for alert() */
+        function showToast(text) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = "px-5 py-4 bg-slate-900 border border-slate-800 text-white rounded-2xl flex items-center gap-3 shadow-2xl pointer-events-auto transition-all duration-300 transform translate-y-2 opacity-0 text-xs sm:text-sm";
+            toast.innerHTML = `
+                <div class="w-6 h-6 rounded-full bg-brand-500 flex items-center justify-center text-white text-xs shrink-0"><i class="fa-solid fa-circle-check"></i></div>
+                <p class="font-medium">${sanitizeHTML(text)}</p>
+            `;
+            container.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.classList.remove('translate-y-2', 'opacity-0');
+            }, 50);
+
+            setTimeout(() => {
+                toast.classList.add('translate-y-2', 'opacity-0');
+                setTimeout(() => {
+                    toast.remove();
+                }, 300);
+            }, 4000);
+        }
+    </script>
+</body>
+</html>
