@@ -26,18 +26,18 @@
                     },
                     colors: {
                         brand: {
-                            50: '#f0fdf4',
-                            100: '#dcfce7',
-                            500: '#10b981',
-                            600: '#059669',
-                            700: '#047857',
-                            800: '#065f46',
-                            900: '#064e3b',
+                            50: '#f8fafc',
+                            100: '#f1f5f9',
+                            500: '#0c2340', /* Navy Premium dari Logo CBC */
+                            600: '#07162c',
+                            700: '#030b16',
+                            800: '#010408',
+                            900: '#000000',
                         },
                         accent: {
-                            500: '#f59e0b',
-                            600: '#d97706',
-                            700: '#b45309',
+                            500: '#d4af37', /* Gold Premium dari Logo CBC */
+                            600: '#b8932c',
+                            700: '#997820',
                         }
                     }
                 }
@@ -46,8 +46,8 @@
     </script>
     <style>
         /* Smooth Custom Styles */
-        .glassmorphism {
-            background: rgba(15, 23, 42, 0.85);
+        .glassmorphism-light {
+            background: rgba(255, 255, 255, 0.9);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
         }
@@ -58,46 +58,67 @@
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
+        /* Custom map pointer layer index */
+        .leaflet-container {
+            z-index: 10;
+        }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col antialiased">
+<body class="bg-white text-slate-800 font-sans min-h-screen flex flex-col antialiased">
 
     <!-- Floating Header / Navbar -->
-    <header class="fixed top-0 left-0 w-full z-50 transition-all duration-300" id="main-header">
+    <header class="fixed top-0 left-0 w-full z-50 transition-all duration-300 border-b border-slate-100" id="main-header">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
-                <!-- Logo & Brand Name -->
-                <a href="#home" class="flex items-center space-x-3">
-                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-accent-500 flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-brand-900/20">
-                        C
+                <!-- Logo & Brand Name (Recreated SVG of CBC Logo) -->
+                <a href="#home" class="flex items-center space-x-3 group">
+                    <!-- Inline SVG Recreating CBC Logo exactly like rijal1.jpg -->
+                    <div class="w-14 h-14 shrink-0 flex items-center justify-center bg-white p-1 rounded-xl shadow-sm border border-slate-100">
+                        <svg class="w-full h-full" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Left C -->
+                            <path d="M60 135C40.67 135 25 119.33 25 100C25 80.67 40.67 65 60 65C69.33 65 77.5 68.67 83.5 74.67" stroke="#0c2340" stroke-width="16" stroke-linecap="round"/>
+                            <!-- Right C -->
+                            <path d="M140 65C159.33 65 175 80.67 175 100C175 119.33 159.33 135 140 135C130.67 135 122.5 131.33 116.5 125.33" stroke="#0c2340" stroke-width="16" stroke-linecap="round"/>
+                            <!-- Middle Skyscraper stylized B (Gold) -->
+                            <!-- Back Skyscraper Outline -->
+                            <path d="M85 140V55L108 40V140H85Z" fill="#0c2340"/>
+                            <path d="M108 140V70L125 58V140H108Z" fill="#0c2340" opacity="0.8"/>
+                            <!-- B curves integration over building (Gold) -->
+                            <path d="M88 65H110C118.28 65 125 71.72 125 80C125 88.28 118.28 95 110 95H88" stroke="#d4af37" stroke-width="12" stroke-linecap="round"/>
+                            <path d="M88 95H114C122.28 95 129 101.72 129 110C129 118.28 122.28 125 114 125H88" stroke="#d4af37" stroke-width="12" stroke-linecap="round"/>
+                            <line x1="88" y1="58" x2="88" y2="135" stroke="#d4af37" stroke-width="12" stroke-linecap="round"/>
+                            <!-- Arch elements on B -->
+                            <path d="M100 75C108 75 114 78 114 82" stroke="#ffffff" stroke-width="4" stroke-linecap="round"/>
+                            <path d="M100 85C108 85 114 88 114 92" stroke="#ffffff" stroke-width="4" stroke-linecap="round"/>
+                        </svg>
                     </div>
                     <div class="flex flex-col">
-                        <span class="font-extrabold text-lg text-slate-900 tracking-tight leading-none" id="brand-text-main">PT CBC PROPERTY</span>
-                        <span class="text-xs text-brand-600 font-semibold tracking-wider uppercase mt-1">Property Development</span>
+                        <span class="font-black text-xl text-slate-900 tracking-tight leading-none group-hover:text-brand-500 transition-colors">PT CBC PROPERTY</span>
+                        <span class="text-[10px] text-accent-600 font-extrabold tracking-widest uppercase mt-1">Property & Multi-Consulting</span>
                     </div>
                 </a>
 
                 <!-- Desktop Navigation Menu -->
                 <nav class="hidden md:flex items-center space-x-1 lg:space-x-2">
-                    <a href="#home" class="px-3 py-2 rounded-lg text-sm font-semibold transition-all duration-200 text-slate-700 hover:text-brand-600 hover:bg-slate-100">Beranda</a>
-                    <a href="#tentang" class="px-3 py-2 rounded-lg text-sm font-semibold transition-all duration-200 text-slate-700 hover:text-brand-600 hover:bg-slate-100">Tentang Kami</a>
-                    <a href="#unit" class="px-3 py-2 rounded-lg text-sm font-semibold transition-all duration-200 text-slate-700 hover:text-brand-600 hover:bg-slate-100">Unit Properti</a>
-                    <a href="#keunggulan" class="px-3 py-2 rounded-lg text-sm font-semibold transition-all duration-200 text-slate-700 hover:text-brand-600 hover:bg-slate-100">Keunggulan</a>
-                    <a href="#galeri" class="px-3 py-2 rounded-lg text-sm font-semibold transition-all duration-200 text-slate-700 hover:text-brand-600 hover:bg-slate-100">Progres Galeri</a>
-                    <a href="#kontak" class="px-3 py-2 rounded-lg text-sm font-semibold transition-all duration-200 text-slate-700 hover:text-brand-600 hover:bg-slate-100">Hubungi</a>
+                    <a href="#home" class="px-3 py-2 rounded-lg text-sm font-semibold transition-all duration-200 text-slate-700 hover:text-brand-500 hover:bg-slate-100">Beranda</a>
+                    <a href="#tentang" class="px-3 py-2 rounded-lg text-sm font-semibold transition-all duration-200 text-slate-700 hover:text-brand-500 hover:bg-slate-100">Tentang Kami</a>
+                    <a href="#layanan" class="px-3 py-2 rounded-lg text-sm font-semibold transition-all duration-200 text-slate-700 hover:text-brand-500 hover:bg-slate-100">Layanan Bisnis</a>
+                    <a href="#unit" class="px-3 py-2 rounded-lg text-sm font-semibold transition-all duration-200 text-slate-700 hover:text-brand-500 hover:bg-slate-100">Unit Properti</a>
+                    <a href="#galeri" class="px-3 py-2 rounded-lg text-sm font-semibold transition-all duration-200 text-slate-700 hover:text-brand-500 hover:bg-slate-100">Progres Galeri</a>
+                    <a href="#kontak" class="px-3 py-2 rounded-lg text-sm font-semibold transition-all duration-200 text-slate-700 hover:text-brand-500 hover:bg-slate-100">Hubungi</a>
                 </nav>
 
                 <!-- Action Button -->
                 <div class="hidden md:flex items-center">
-                    <a href="https://wa.me/628161988979?text=Halo%20PT%20CBC%20PROPERTY,%20saya%20tertarik%20konsultasi%20mengenai%20properti" target="_blank" class="inline-flex items-center justify-center px-5 py-2.5 rounded-xl bg-brand-600 text-white font-semibold text-sm hover:bg-brand-700 transition-all duration-350 shadow-md hover:shadow-lg shadow-brand-600/20 gap-2">
-                        <i class="fa-brands fa-whatsapp text-lg"></i>
+                    <a href="https://wa.me/62895359048761?text=Halo%20PT%20CBC%20PROPERTY,%20saya%20tertarik%20konsultasi" target="_blank" class="inline-flex items-center justify-center px-5 py-2.5 rounded-xl bg-brand-500 text-white font-semibold text-sm hover:bg-brand-600 transition-all duration-350 shadow-md hover:shadow-lg shadow-brand-500/20 gap-2">
+                        <i class="fa-brands fa-whatsapp text-lg text-accent-500"></i>
                         <span>Konsultasi Gratis</span>
                     </a>
                 </div>
 
                 <!-- Mobile menu button -->
                 <div class="md:hidden">
-                    <button type="button" class="text-slate-700 hover:text-brand-600 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500" id="btn-mobile-menu">
+                    <button type="button" class="text-slate-700 hover:text-brand-500 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500" id="btn-mobile-menu">
                         <i class="fa-solid fa-bars text-2xl" id="icon-mobile-menu"></i>
                     </button>
                 </div>
@@ -105,17 +126,17 @@
         </div>
 
         <!-- Mobile Menu panel -->
-        <div class="hidden md:hidden glassmorphism border-t border-slate-800 transition-all duration-300" id="mobile-menu-container">
+        <div class="hidden md:hidden bg-white/95 border-t border-slate-100 shadow-xl transition-all duration-300" id="mobile-menu-container">
             <div class="px-2 pt-2 pb-4 space-y-1 sm:px-3">
-                <a href="#home" class="block px-4 py-3 rounded-xl text-base font-semibold text-white hover:bg-brand-600/20 hover:text-brand-400">Beranda</a>
-                <a href="#tentang" class="block px-4 py-3 rounded-xl text-base font-semibold text-white hover:bg-brand-600/20 hover:text-brand-400">Tentang Kami</a>
-                <a href="#unit" class="block px-4 py-3 rounded-xl text-base font-semibold text-white hover:bg-brand-600/20 hover:text-brand-400">Unit Properti</a>
-                <a href="#keunggulan" class="block px-4 py-3 rounded-xl text-base font-semibold text-white hover:bg-brand-600/20 hover:text-brand-400">Keunggulan</a>
-                <a href="#galeri" class="block px-4 py-3 rounded-xl text-base font-semibold text-white hover:bg-brand-600/20 hover:text-brand-400">Progres Galeri</a>
-                <a href="#kontak" class="block px-4 py-3 rounded-xl text-base font-semibold text-white hover:bg-brand-600/20 hover:text-brand-400">Hubungi</a>
-                <div class="pt-4 pb-2 border-t border-slate-700/50 mt-2 px-4">
-                    <a href="https://wa.me/628161988979?text=Halo%20PT%20CBC%20PROPERTY" target="_blank" class="w-full flex items-center justify-center py-3 px-4 bg-brand-600 rounded-xl text-white font-bold text-center gap-2 hover:bg-brand-700">
-                        <i class="fa-brands fa-whatsapp text-xl"></i>
+                <a href="#home" class="block px-4 py-3 rounded-xl text-base font-semibold text-slate-800 hover:bg-slate-50 hover:text-brand-500">Beranda</a>
+                <a href="#tentang" class="block px-4 py-3 rounded-xl text-base font-semibold text-slate-800 hover:bg-slate-50 hover:text-brand-500">Tentang Kami</a>
+                <a href="#layanan" class="block px-4 py-3 rounded-xl text-base font-semibold text-slate-800 hover:bg-slate-50 hover:text-brand-500">Layanan Bisnis</a>
+                <a href="#unit" class="block px-4 py-3 rounded-xl text-base font-semibold text-slate-800 hover:bg-slate-50 hover:text-brand-500">Unit Properti</a>
+                <a href="#galeri" class="block px-4 py-3 rounded-xl text-base font-semibold text-slate-800 hover:bg-slate-50 hover:text-brand-500">Progres Galeri</a>
+                <a href="#kontak" class="block px-4 py-3 rounded-xl text-base font-semibold text-slate-800 hover:bg-slate-50 hover:text-brand-500">Hubungi</a>
+                <div class="pt-4 pb-2 border-t border-slate-100 mt-2 px-4">
+                    <a href="https://wa.me/62895359048761?text=Halo%20PT%20CBC%20PROPERTY" target="_blank" class="w-full flex items-center justify-center py-3 px-4 bg-brand-500 rounded-xl text-white font-bold text-center gap-2 hover:bg-brand-600">
+                        <i class="fa-brands fa-whatsapp text-xl text-accent-500"></i>
                         <span>Hubungi via WhatsApp</span>
                     </a>
                 </div>
@@ -123,14 +144,14 @@
         </div>
     </header>
 
-    <!-- Hero / Main Showcase Section -->
-    <section id="home" class="relative min-h-screen flex items-center justify-center pt-24 pb-16 bg-slate-900 overflow-hidden">
-        <!-- Background Pattern & Overlay -->
+    <!-- Hero Section (Transformed to Premium White/Light Theme) -->
+    <section id="home" class="relative min-h-screen flex items-center justify-center pt-28 pb-16 bg-gradient-to-b from-slate-50 via-white to-white overflow-hidden">
+        <!-- Background Pattern & Subtle Glow -->
         <div class="absolute inset-0 z-0">
-            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1920&q=80" alt="Luxury House Background" class="w-full h-full object-cover opacity-25 filter blur-xs">
-            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/90 to-slate-900/60"></div>
-            <!-- Decorative circle gradients -->
-            <div class="absolute top-1/4 -left-1/4 w-[600px] h-[600px] bg-brand-600/10 rounded-full filter blur-[120px]"></div>
+            <!-- Sleek background architectural blueprint / abstract structure -->
+            <div class="absolute inset-0 opacity-[0.03] bg-[radial-gradient(#0c2340_1px,transparent_1px)] [background-size:16px_16px]"></div>
+            <!-- Decorative circle color drops -->
+            <div class="absolute top-1/4 -left-1/4 w-[600px] h-[600px] bg-brand-500/5 rounded-full filter blur-[120px]"></div>
             <div class="absolute bottom-1/4 -right-1/4 w-[600px] h-[600px] bg-accent-500/10 rounded-full filter blur-[120px]"></div>
         </div>
 
@@ -139,59 +160,59 @@
                 
                 <!-- Hero Left: Text Content -->
                 <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
-                    <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-500/10 border border-brand-500/20 text-brand-400 text-xs sm:text-sm font-semibold uppercase tracking-wider">
-                        <i class="fa-solid fa-house-chimney-user text-xs"></i>
-                        Developer Properti Terpercaya & Legal
+                    <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-100 border border-slate-200 text-brand-500 text-xs sm:text-sm font-bold uppercase tracking-wider">
+                        <span class="w-2 h-2 rounded-full bg-accent-500 animate-pulse"></span>
+                        Developer Properti & Agensi Bisnis Terintegrasi
                     </span>
-                    <h1 class="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-extrabold text-white tracking-tight leading-tight">
-                        Wujudkan Hunian Impian <br class="hidden sm:inline">
-                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-400 via-emerald-400 to-accent-400">Keluarga Masa Kini</span>
+                    <h1 class="text-4xl sm:text-5xl lg:text-5xl xl:text-6xl font-black text-slate-900 tracking-tight leading-tight">
+                        Solusi Investasi Properti <br class="hidden sm:inline">
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-500 via-brand-600 to-accent-600">& Multidisiplin Bisnis</span>
                     </h1>
-                    <p class="text-slate-300 text-base sm:text-lg max-w-xl mx-auto lg:mx-0 font-light leading-relaxed">
-                        Kami menghadirkan perumahan berkonsep modern minimalis, berlokasi sangat strategis, dan didukung legalitas bersertifikat 100% aman untuk masa depan Anda.
+                    <p class="text-slate-600 text-base sm:text-lg max-w-xl mx-auto lg:mx-0 font-normal leading-relaxed">
+                        Kami menghadirkan perumahan modern berkualitas tinggi di area strategis Bogor serta pendampingan korporasi profesional terlengkap untuk kesuksesan Anda.
                     </p>
                     <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
-                        <a href="#unit" class="w-full sm:w-auto px-8 py-4 bg-brand-600 hover:bg-brand-700 text-white font-bold rounded-xl transition-all duration-300 shadow-lg shadow-brand-600/25 flex items-center justify-center gap-2">
+                        <a href="#unit" class="w-full sm:w-auto px-8 py-4 bg-brand-500 hover:bg-brand-600 text-white font-bold rounded-xl transition-all duration-300 shadow-lg shadow-brand-500/25 flex items-center justify-center gap-2">
                             <span>Lihat Koleksi Unit</span>
-                            <i class="fa-solid fa-arrow-right text-sm"></i>
+                            <i class="fa-solid fa-arrow-right text-sm text-accent-500"></i>
                         </a>
-                        <a href="#tentang" class="w-full sm:w-auto px-8 py-4 bg-white/10 hover:bg-white/15 text-white font-semibold rounded-xl border border-white/10 hover:border-white/20 transition-all duration-300 flex items-center justify-center gap-2">
-                            <span>Tentang CBC</span>
+                        <a href="#layanan" class="w-full sm:w-auto px-8 py-4 bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold rounded-xl border border-slate-200 transition-all duration-300 flex items-center justify-center gap-2">
+                            <span>Konsultasi Bisnis & Hukum</span>
                         </a>
                     </div>
                 </div>
 
-                <!-- Hero Right: Property Showcase Card -->
+                <!-- Hero Right: Property Showcase Card (Light modern glassmorphism) -->
                 <div class="lg:col-span-5 hidden lg:block">
-                    <div class="bg-slate-800/80 border border-slate-700/50 p-4 rounded-3xl shadow-2xl backdrop-blur-md relative overflow-hidden group">
+                    <div class="bg-white border border-slate-200 p-5 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 group relative overflow-hidden">
                         <div class="relative rounded-2xl overflow-hidden h-64 mb-4">
                             <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80" alt="Areum Parc Bogor" class="w-full h-full object-cover group-hover:scale-105 transition-all duration-700">
-                            <span class="absolute top-3 left-3 px-3 py-1 rounded-lg bg-brand-600 text-white font-semibold text-xs shadow-md">Unit Terlaris</span>
-                            <span class="absolute bottom-3 right-3 px-3 py-1 rounded-lg bg-slate-900/80 text-white font-semibold text-xs backdrop-blur-xs">Bogor, Kemang</span>
+                            <span class="absolute top-3 left-3 px-3 py-1 rounded-lg bg-brand-500 text-white font-bold text-xs shadow-md">Unit Terlaris</span>
+                            <span class="absolute bottom-3 right-3 px-3 py-1 rounded-lg bg-slate-900/80 text-white font-semibold text-xs backdrop-blur-xs">Bogor, Ciseeng</span>
                         </div>
                         <div class="space-y-3">
                             <div class="flex justify-between items-start">
-                                <h3 class="text-xl font-bold text-white group-hover:text-brand-400 transition-colors">Areum Parc Luxury</h3>
-                                <p class="text-lg font-extrabold text-accent-500">Rp 750 Juta</p>
+                                <h3 class="text-xl font-bold text-slate-900 group-hover:text-brand-500 transition-colors">Areum Parc Luxury</h3>
+                                <p class="text-lg font-extrabold text-accent-600">Rp 750 Juta</p>
                             </div>
-                            <p class="text-slate-400 text-sm">Scandinavian Mezzanine dengan teknologi Smart Home premium.</p>
-                            <div class="grid grid-cols-3 gap-2 py-3 border-t border-b border-slate-700/50 text-xs text-slate-300">
+                            <p class="text-slate-500 text-sm">Scandinavian Mezzanine premium dengan sistem keamanan satu gerbang terpadu.</p>
+                            <div class="grid grid-cols-3 gap-2 py-3 border-t border-b border-slate-100 text-xs text-slate-600">
                                 <div class="flex items-center gap-1.5">
-                                    <i class="fa-solid fa-maximize text-brand-400"></i>
+                                    <i class="fa-solid fa-maximize text-accent-600"></i>
                                     <span>LT: 72 m²</span>
                                 </div>
                                 <div class="flex items-center gap-1.5">
-                                    <i class="fa-solid fa-house-laptop text-brand-400"></i>
+                                    <i class="fa-solid fa-house-laptop text-accent-600"></i>
                                     <span>LB: 55 m²</span>
                                 </div>
                                 <div class="flex items-center gap-1.5">
-                                    <i class="fa-solid fa-bed text-brand-400"></i>
+                                    <i class="fa-solid fa-bed text-accent-600"></i>
                                     <span>3 Kamar</span>
                                 </div>
                             </div>
                             <div class="flex items-center justify-between pt-1">
-                                <span class="text-xs text-emerald-400 flex items-center gap-1"><i class="fa-solid fa-circle text-[8px] animate-ping"></i> Sertifikat Ready</span>
-                                <button onclick="openPropertyDetail('Areum Parc Luxury')" class="text-xs font-bold text-brand-400 hover:text-white flex items-center gap-1 transition-all">Info Detail <i class="fa-solid fa-chevron-right text-[10px]"></i></button>
+                                <span class="text-xs text-emerald-600 flex items-center gap-1"><i class="fa-solid fa-circle text-[8px] animate-ping"></i> Sertifikat SHM Ready</span>
+                                <button onclick="openPropertyDetail('Areum Parc Luxury')" class="text-xs font-bold text-brand-500 hover:text-accent-600 flex items-center gap-1 transition-all">Info Detail <i class="fa-solid fa-chevron-right text-[10px]"></i></button>
                             </div>
                         </div>
                     </div>
@@ -202,7 +223,7 @@
             <!-- Interactive Live Search Engine -->
             <div class="mt-16 bg-white rounded-3xl shadow-xl border border-slate-100 p-6 max-w-5xl mx-auto relative z-20">
                 <h3 class="text-slate-700 font-bold text-sm mb-4 uppercase tracking-wide flex items-center gap-2">
-                    <i class="fa-solid fa-magnifying-glass text-brand-600"></i> Cari Unit Hunian Impian Anda
+                    <i class="fa-solid fa-magnifying-glass text-brand-500"></i> Cari Unit Hunian Impian Anda
                 </h3>
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
                     <!-- Dropdown Lokasi -->
@@ -253,8 +274,8 @@
 
                     <!-- Search Button -->
                     <div>
-                        <button onclick="handleFilterSearch()" class="w-full py-3.5 px-6 bg-brand-600 hover:bg-brand-700 text-white font-bold text-sm rounded-xl transition-all duration-200 flex items-center justify-center gap-2 shadow-md shadow-brand-600/10">
-                            <i class="fa-solid fa-sliders text-sm"></i>
+                        <button onclick="handleFilterSearch()" class="w-full py-3.5 px-6 bg-brand-500 hover:bg-brand-600 text-white font-bold text-sm rounded-xl transition-all duration-200 flex items-center justify-center gap-2 shadow-md shadow-brand-500/10">
+                            <i class="fa-solid fa-sliders text-sm text-accent-500"></i>
                             <span>Saring Properti</span>
                         </button>
                     </div>
@@ -273,66 +294,50 @@
                     <div class="relative rounded-3xl overflow-hidden shadow-2xl z-10 border border-slate-100">
                         <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=800&q=80" alt="Tentang CBC Property" class="w-full h-full object-cover">
                         <!-- Experience Badge Overlay -->
-                        <div class="absolute bottom-6 left-6 right-6 bg-slate-900/95 backdrop-blur-md p-6 rounded-2xl border border-white/10 text-white flex items-center gap-4">
-                            <div class="text-4xl font-extrabold text-brand-400">12+</div>
-                            <div class="text-xs font-semibold uppercase tracking-wider text-slate-300">Tahun Pengalaman dalam Konstruksi & Developer Properti Terpercaya</div>
+                        <div class="absolute bottom-6 left-6 right-6 bg-white/95 backdrop-blur-md p-6 rounded-2xl border border-slate-100 text-slate-900 flex items-center gap-4 shadow-xl">
+                            <div class="text-4xl font-black text-brand-500">12+</div>
+                            <div class="text-xs font-extrabold uppercase tracking-wider text-slate-600">Tahun Pengalaman dalam Konstruksi & Multi Layanan Bisnis Terpercaya</div>
                         </div>
                     </div>
                     <!-- Decorative back elements -->
-                    <div class="absolute -top-6 -left-6 w-32 h-32 bg-brand-100 rounded-3xl -z-10 animate-pulse"></div>
-                    <div class="absolute -bottom-6 -right-6 w-32 h-32 bg-accent-50 rounded-3xl -z-10"></div>
+                    <div class="absolute -top-6 -left-6 w-32 h-32 bg-slate-100 rounded-3xl -z-10 animate-pulse"></div>
+                    <div class="absolute -bottom-6 -right-6 w-32 h-32 bg-slate-50 rounded-3xl -z-10"></div>
                 </div>
 
                 <!-- Right Column: Corporate Information -->
                 <div class="lg:col-span-7 space-y-8">
                     <div class="space-y-3">
-                        <span class="text-sm font-bold text-brand-600 uppercase tracking-widest block">Keluarga Besar CBC Property</span>
-                        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
-                            Membangun Hunian Berkualitas <br class="hidden sm:inline">
-                            Dengan Komitmen Keberlanjutan
+                        <span class="text-sm font-bold text-accent-600 uppercase tracking-widest block">Keluarga Besar CBC Property</span>
+                        <h2 class="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight leading-tight">
+                            Membangun Integritas Bisnis <br class="hidden sm:inline">
+                            Serta Hunian Berkualitas Tinggi
                         </h2>
                     </div>
 
                     <div class="space-y-4 text-slate-600 text-base leading-relaxed">
                         <p>
-                            <strong>PT CBC PROPERTY (CBC Property Development)</strong> adalah perusahaan pengembang properti (real estate developer) yang berdiri sejak tahun 2014. Kami berdedikasi tinggi untuk menciptakan standar baru dalam industri properti yang mengedepankan kualitas dan kepuasan pelanggan.
+                            <strong>PT CBC PROPERTY (CBC Property Development)</strong> adalah pengembang properti andal dan terpercaya yang berdiri dengan dedikasi tinggi menciptakan standar properti terbaik serta berbagai layanan konsultasi profesional di Indonesia.
                         </p>
                         <p>
-                            Berkantor pusat di Sleman, Yogyakarta, serta memiliki jangkauan proyek strategis di Jabodetabek khususnya Bogor, kami fokus menciptakan hunian yang nyaman, aman, tertata rapi, dan sesuai dengan kebutuhan masyarakat modern. Setiap proyek dirancang dengan mengutamakan privasi, kenyamanan, serta kualitas material terbaik.
+                            Berpusat di **Ciseeng, Bogor**, kami tidak hanya menawarkan portofolio real estate bernilai investasi tinggi, melainkan juga menaungi divisi konsultasi multidisiplin. Mulai dari Konsultasi Hukum, Pendampingan Bisnis Korporasi, Pemasaran Strategis, Solusi IT, hingga Integrasi Sistem Robotik.
                         </p>
                     </div>
 
                     <!-- Vision & Mission -->
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
                         <div class="p-5 bg-slate-50 rounded-2xl border border-slate-100/80 space-y-2">
-                            <div class="w-10 h-10 rounded-xl bg-brand-100 text-brand-700 flex items-center justify-center font-bold">
-                                <i class="fa-solid fa-eye text-lg"></i>
+                            <div class="w-10 h-10 rounded-xl bg-brand-500 text-white flex items-center justify-center font-bold">
+                                <i class="fa-solid fa-eye text-lg text-accent-500"></i>
                             </div>
-                            <h4 class="font-bold text-slate-900 text-sm">Visi Kami</h4>
-                            <p class="text-xs text-slate-500 leading-relaxed">Menjadi pengembang properti terdepan yang mengedepankan nilai keberlanjutan (sustainable living) untuk generasi saat ini dan masa depan.</p>
+                            <h4 class="font-extrabold text-slate-900 text-sm">Visi Kami</h4>
+                            <p class="text-xs text-slate-500 leading-relaxed">Menjadi perusahaan properti dan multi-konsultan terdepan yang bernilai guna tinggi dan mengedepankan solusi terintegrasi serta legalitas tepercaya.</p>
                         </div>
                         <div class="p-5 bg-slate-50 rounded-2xl border border-slate-100/80 space-y-2">
-                            <div class="w-10 h-10 rounded-xl bg-accent-100 text-accent-700 flex items-center justify-center font-bold">
-                                <i class="fa-solid fa-bullseye text-lg"></i>
+                            <div class="w-10 h-10 rounded-xl bg-brand-500 text-white flex items-center justify-center font-bold">
+                                <i class="fa-solid fa-bullseye text-lg text-accent-500"></i>
                             </div>
-                            <h4 class="font-bold text-slate-900 text-sm">Misi Kami</h4>
-                            <p class="text-xs text-slate-500 leading-relaxed">Menciptakan hunian aman, berkualitas prima, bersertifikat legalitas jelas, serta terjangkau bagi semua keluarga Indonesia.</p>
-                        </div>
-                    </div>
-
-                    <!-- Quick stats counts -->
-                    <div class="grid grid-cols-3 gap-4 pt-4 border-t border-slate-100">
-                        <div>
-                            <p class="text-2xl sm:text-3xl font-extrabold text-slate-900">500+</p>
-                            <p class="text-xs text-slate-500 font-medium">Unit Terjual</p>
-                        </div>
-                        <div>
-                            <p class="text-2xl sm:text-3xl font-extrabold text-slate-900">100%</p>
-                            <p class="text-xs text-slate-500 font-medium">Sertifikat Clear</p>
-                        </div>
-                        <div>
-                            <p class="text-2xl sm:text-3xl font-extrabold text-slate-900">8+</p>
-                            <p class="text-xs text-slate-500 font-medium">Kawasan Cluster</p>
+                            <h4 class="font-extrabold text-slate-900 text-sm">Misi Kami</h4>
+                            <p class="text-xs text-slate-500 leading-relaxed">Membangun properti berstruktur kokoh, mempermudah akses kepemilikan, dan menyediakan layanan korporasi secara profesional dan jujur.</p>
                         </div>
                     </div>
 
@@ -342,21 +347,112 @@
         </div>
     </section>
 
-    <!-- Section: Unit Properti -->
-    <section id="unit" class="py-24 bg-slate-50 scroll-mt-20">
+    <!-- NEW SECTION: Layanan Bisnis CBC (Reflected from rijal2.jpg Profile) -->
+    <section id="layanan" class="py-24 bg-slate-50 scroll-mt-20 border-t border-b border-slate-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-2xl mx-auto space-y-3 mb-16">
-                <span class="text-sm font-bold text-brand-600 uppercase tracking-widest block">Galeri Unit Kami</span>
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">Koleksi Properti Terbaik CBC</h2>
+                <span class="text-sm font-bold text-accent-600 uppercase tracking-widest block">Layanan Terpadu CBC</span>
+                <h2 class="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">Katalog Solusi Multidisiplin</h2>
+                <p class="text-slate-500 text-sm sm:text-base">PT CBC PROPERTY menyediakan ekosistem konsultasi komprehensif untuk mendukung keandalan aset properti serta laju perkembangan bisnis korporasi Anda.</p>
+            </div>
+
+            <!-- Services Grid (7 items according to rijal2.jpg) -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Service 1: Konsultasi Hukum -->
+                <div class="bg-white p-6 rounded-3xl border border-slate-200/65 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between group">
+                    <div class="space-y-4">
+                        <div class="w-12 h-12 rounded-2xl bg-brand-500 flex items-center justify-center text-white group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-scale-balanced text-xl text-accent-500"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-slate-900">Konsultasi Hukum</h4>
+                        <p class="text-slate-500 text-xs leading-relaxed">Pendampingan perizinan legalitas, validasi sertifikasi SHM, pembagian waris tanah, serta mitigasi risiko kontrak hukum properti.</p>
+                    </div>
+                </div>
+
+                <!-- Service 2: Konsultasi Bisnis -->
+                <div class="bg-white p-6 rounded-3xl border border-slate-200/65 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between group">
+                    <div class="space-y-4">
+                        <div class="w-12 h-12 rounded-2xl bg-brand-500 flex items-center justify-center text-white group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-briefcase text-xl text-accent-500"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-slate-900">Konsultasi Bisnis</h4>
+                        <p class="text-slate-500 text-xs leading-relaxed">Analisis kelayakan investasi, penyusunan studi pasar (feasibility study), strategi ekspansi korporat, dan manajemen aset.</p>
+                    </div>
+                </div>
+
+                <!-- Service 3: Konsultasi Pemasaran -->
+                <div class="bg-white p-6 rounded-3xl border border-slate-200/65 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between group">
+                    <div class="space-y-4">
+                        <div class="w-12 h-12 rounded-2xl bg-brand-500 flex items-center justify-center text-white group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-chart-line text-xl text-accent-500"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-slate-900">Konsultasi Pemasaran</h4>
+                        <p class="text-slate-500 text-xs leading-relaxed">Penyusunan blueprint kampanye penjualan produk perumahan, optimasi promosi digital, dan pemetaan segmen pasar.</p>
+                    </div>
+                </div>
+
+                <!-- Service 4: Konsultasi IT -->
+                <div class="bg-white p-6 rounded-3xl border border-slate-200/65 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between group">
+                    <div class="space-y-4">
+                        <div class="w-12 h-12 rounded-2xl bg-brand-500 flex items-center justify-center text-white group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-laptop-code text-xl text-accent-500"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-slate-900">Konsultasi IT</h4>
+                        <p class="text-slate-500 text-xs leading-relaxed">Penyediaan infrastruktur jaringan cerdas, keamanan data digital, dan perancangan platform ERP internal untuk bisnis.</p>
+                    </div>
+                </div>
+
+                <!-- Service 5: Konsultasi Robotik -->
+                <div class="bg-white p-6 rounded-3xl border border-slate-200/65 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between group">
+                    <div class="space-y-4">
+                        <div class="w-12 h-12 rounded-2xl bg-brand-500 flex items-center justify-center text-white group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-robot text-xl text-accent-500"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-slate-900">Konsultasi Robotik</h4>
+                        <p class="text-slate-500 text-xs leading-relaxed">Pengembangan sensor keamanan otomasi hunian pintar (smart home system), Internet of Things (IoT), dan teknologi otomatisasi hemat daya.</p>
+                    </div>
+                </div>
+
+                <!-- Service 6: Lawyer / Pengacara -->
+                <div class="bg-white p-6 rounded-3xl border border-slate-200/65 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between group">
+                    <div class="space-y-4">
+                        <div class="w-12 h-12 rounded-2xl bg-brand-500 flex items-center justify-center text-white group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-gavel text-xl text-accent-500"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-slate-900">Lawyer / Pengacara</h4>
+                        <p class="text-slate-500 text-xs leading-relaxed">Layanan pengacara profesional untuk perkara litigasi maupun non-litigasi terkait sengketa tanah, kepatuhan korporasi, dan hukum bisnis.</p>
+                    </div>
+                </div>
+
+                <!-- Service 7: Property Agent / Agen Properti -->
+                <div class="bg-white p-6 rounded-3xl border border-slate-200/65 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between group col-span-1 sm:col-span-2 lg:col-span-2">
+                    <div class="space-y-4">
+                        <div class="w-12 h-12 rounded-2xl bg-brand-500 flex items-center justify-center text-white group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-house-circle-check text-xl text-accent-500"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-slate-900">Property Agent (Brokerage Resmi)</h4>
+                        <p class="text-slate-500 text-xs leading-relaxed">Layanan titip jual-beli sewa tanah dan perumahan sekunder di area Jabodetabek. Menjamin transaksi aman dan legalitas bebas sengketa antar-pihak.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: Unit Properti -->
+    <section id="unit" class="py-24 bg-white scroll-mt-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto space-y-3 mb-16">
+                <span class="text-sm font-bold text-accent-600 uppercase tracking-widest block">Galeri Unit Kami</span>
+                <h2 class="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">Koleksi Properti Terbaik CBC</h2>
                 <p class="text-slate-500 text-sm sm:text-base">Mulai dari hunian bertipe minimalis, modern mezzanine, hingga tipe rumah tumbuh bertingkat dengan harga terjangkau.</p>
                 
                 <!-- Category Filter Buttons -->
                 <div class="flex flex-wrap items-center justify-center gap-2 pt-6 overflow-x-auto hide-scrollbar">
-                    <button onclick="filterCategory('all')" class="category-btn px-5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 bg-brand-600 text-white" id="cat-all">Semua Unit</button>
-                    <button onclick="filterCategory('kemang')" class="category-btn px-5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 bg-white text-slate-600 hover:bg-slate-100 border border-slate-200" id="cat-kemang">Kemang, Bogor</button>
-                    <button onclick="filterCategory('ciomas')" class="category-btn px-5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 bg-white text-slate-600 hover:bg-slate-100 border border-slate-200" id="cat-ciomas">Ciomas, Bogor</button>
-                    <button onclick="filterCategory('bojonggede')" class="category-btn px-5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 bg-white text-slate-600 hover:bg-slate-100 border border-slate-200" id="cat-bojonggede">Bojonggede, Bogor</button>
-                    <button onclick="filterCategory('cibinong')" class="category-btn px-5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 bg-white text-slate-600 hover:bg-slate-100 border border-slate-200" id="cat-cibinong">Cibinong, Bogor</button>
+                    <button onclick="filterCategory('all')" class="category-btn px-5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 bg-brand-500 text-white" id="cat-all">Semua Unit</button>
+                    <button onclick="filterCategory('kemang')" class="category-btn px-5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 bg-slate-100 text-slate-600 hover:bg-slate-200 border border-slate-200" id="cat-kemang">Kemang, Bogor</button>
+                    <button onclick="filterCategory('ciomas')" class="category-btn px-5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 bg-slate-100 text-slate-600 hover:bg-slate-200 border border-slate-200" id="cat-ciomas">Ciomas, Bogor</button>
+                    <button onclick="filterCategory('bojonggede')" class="category-btn px-5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 bg-slate-100 text-slate-600 hover:bg-slate-200 border border-slate-200" id="cat-bojonggede">Bojonggede, Bogor</button>
+                    <button onclick="filterCategory('cibinong')" class="category-btn px-5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 bg-slate-100 text-slate-600 hover:bg-slate-200 border border-slate-200" id="cat-cibinong">Cibinong, Bogor</button>
                 </div>
             </div>
 
@@ -374,85 +470,85 @@
         </div>
     </section>
 
-    <!-- Section: Keunggulan Properti -->
-    <section id="keunggulan" class="py-24 bg-slate-900 text-white scroll-mt-20 relative overflow-hidden">
+    <!-- Section: Keunggulan Properti (Transformed to Premium White/Light Theme) -->
+    <section id="keunggulan" class="py-24 bg-slate-50 text-slate-800 border-t border-b border-slate-100 scroll-mt-20 relative overflow-hidden">
         <!-- Decorative bg glow -->
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-brand-600/10 rounded-full filter blur-[150px] -z-10"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-brand-500/5 rounded-full filter blur-[150px] -z-10"></div>
         
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-2xl mx-auto space-y-3 mb-16">
-                <span class="text-sm font-bold text-brand-400 uppercase tracking-widest block">Mengapa Memilih CBC?</span>
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">Kelebihan Setiap Unit Hunian CBC</h2>
-                <p class="text-slate-400 text-sm sm:text-base">Setiap sudut bangunan dipikirkan matang-matang demi kenyamanan, kualitas jangka panjang, dan kelancaran investasi.</p>
+                <span class="text-sm font-bold text-accent-600 uppercase tracking-widest block">Mengapa Memilih CBC?</span>
+                <h2 class="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">Kelebihan Setiap Unit Hunian CBC</h2>
+                <p class="text-slate-500 text-sm sm:text-base">Setiap sudut bangunan dipikirkan matang-matang demi kenyamanan, kualitas jangka panjang, dan kelancaran investasi.</p>
             </div>
 
             <!-- Advantage Grid -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Card 1 -->
-                <div class="bg-slate-800/50 border border-slate-800 p-8 rounded-3xl space-y-4 hover:border-brand-500/30 transition-all duration-300 group">
-                    <div class="w-12 h-12 rounded-2xl bg-brand-500/10 text-brand-400 flex items-center justify-center text-xl font-bold group-hover:bg-brand-500 group-hover:text-white transition-all duration-300">
-                        <i class="fa-solid fa-file-shield"></i>
+                <div class="bg-white border border-slate-200 p-8 rounded-3xl space-y-4 hover:border-brand-500/30 transition-all duration-300 group shadow-sm">
+                    <div class="w-12 h-12 rounded-2xl bg-brand-500 text-white flex items-center justify-center text-xl font-bold group-hover:scale-110 transition-all duration-300">
+                        <i class="fa-solid fa-file-shield text-accent-500"></i>
                     </div>
-                    <h4 class="text-xl font-bold text-white">Legalitas & Sertifikat Aman</h4>
-                    <p class="text-slate-400 text-sm leading-relaxed">Seluruh berkas legalitas dari SHM (Sertifikat Hak Milik), IMB/PBG sudah lengkap dan siap divalidasi guna kelancaran KPR dan kepemilikan.</p>
+                    <h4 class="text-xl font-bold text-slate-900">Legalitas & Sertifikat Aman</h4>
+                    <p class="text-slate-500 text-sm leading-relaxed">Seluruh berkas legalitas dari SHM (Sertifikat Hak Milik), IMB/PBG sudah lengkap dan siap divalidasi guna kelancaran KPR dan kepemilikan.</p>
                 </div>
                 <!-- Card 2 -->
-                <div class="bg-slate-800/50 border border-slate-800 p-8 rounded-3xl space-y-4 hover:border-brand-500/30 transition-all duration-300 group">
-                    <div class="w-12 h-12 rounded-2xl bg-brand-500/10 text-brand-400 flex items-center justify-center text-xl font-bold group-hover:bg-brand-500 group-hover:text-white transition-all duration-300">
-                        <i class="fa-solid fa-compass"></i>
+                <div class="bg-white border border-slate-200 p-8 rounded-3xl space-y-4 hover:border-brand-500/30 transition-all duration-300 group shadow-sm">
+                    <div class="w-12 h-12 rounded-2xl bg-brand-500 text-white flex items-center justify-center text-xl font-bold group-hover:scale-110 transition-all duration-300">
+                        <i class="fa-solid fa-compass text-accent-500"></i>
                     </div>
-                    <h4 class="text-xl font-bold text-white">Lokasi Super Strategis</h4>
-                    <p class="text-slate-400 text-sm leading-relaxed">Setiap lokasi perumahan kami dekat dengan fasilitas publik seperti stasiun kereta, akses pintu jalan tol, rumah sakit, pusat perbelanjaan, dan sekolah.</p>
+                    <h4 class="text-xl font-bold text-slate-900">Lokasi Super Strategis</h4>
+                    <p class="text-slate-500 text-sm leading-relaxed">Setiap lokasi perumahan kami dekat dengan fasilitas publik seperti stasiun kereta, akses pintu jalan tol, rumah sakit, pusat perbelanjaan, dan sekolah.</p>
                 </div>
                 <!-- Card 3 -->
-                <div class="bg-slate-800/50 border border-slate-800 p-8 rounded-3xl space-y-4 hover:border-brand-500/30 transition-all duration-300 group">
-                    <div class="w-12 h-12 rounded-2xl bg-brand-500/10 text-brand-400 flex items-center justify-center text-xl font-bold group-hover:bg-brand-500 group-hover:text-white transition-all duration-300">
-                        <i class="fa-solid fa-handshake"></i>
+                <div class="bg-white border border-slate-200 p-8 rounded-3xl space-y-4 hover:border-brand-500/30 transition-all duration-300 group shadow-sm">
+                    <div class="w-12 h-12 rounded-2xl bg-brand-500 text-white flex items-center justify-center text-xl font-bold group-hover:scale-110 transition-all duration-300">
+                        <i class="fa-solid fa-handshake text-accent-500"></i>
                     </div>
-                    <h4 class="text-xl font-bold text-white">Desain Suka-Suka (Custom)</h4>
-                    <p class="text-slate-400 text-sm leading-relaxed">Berbeda dengan developer lain, kami memberikan kebebasan merancang tata letak (layout) interior atau fasad sesuai keinginan keluarga secara gratis.</p>
+                    <h4 class="text-xl font-bold text-slate-900">Desain Suka-Suka (Custom)</h4>
+                    <p class="text-slate-500 text-sm leading-relaxed">Berbeda dengan developer lain, kami memberikan kebebasan merancang tata letak (layout) interior atau fasad sesuai keinginan keluarga secara gratis.</p>
                 </div>
                 <!-- Card 4 -->
-                <div class="bg-slate-800/50 border border-slate-800 p-8 rounded-3xl space-y-4 hover:border-brand-500/30 transition-all duration-300 group">
-                    <div class="w-12 h-12 rounded-2xl bg-brand-500/10 text-brand-400 flex items-center justify-center text-xl font-bold group-hover:bg-brand-500 group-hover:text-white transition-all duration-300">
-                        <i class="fa-solid fa-hammer"></i>
+                <div class="bg-white border border-slate-200 p-8 rounded-3xl space-y-4 hover:border-brand-500/30 transition-all duration-300 group shadow-sm">
+                    <div class="w-12 h-12 rounded-2xl bg-brand-500 text-white flex items-center justify-center text-xl font-bold group-hover:scale-110 transition-all duration-300">
+                        <i class="fa-solid fa-hammer text-accent-500"></i>
                     </div>
-                    <h4 class="text-xl font-bold text-white">Kualitas Struktur Kokoh</h4>
-                    <p class="text-slate-400 text-sm leading-relaxed">Struktur pondasi cakar ayam kokoh dengan besi ber-SNI, dinding double hebel plester aci, atap spandek/genteng beton, dan plafon gypsum tahan lama.</p>
+                    <h4 class="text-xl font-bold text-slate-900">Kualitas Struktur Kokoh</h4>
+                    <p class="text-slate-500 text-sm leading-relaxed">Struktur pondasi cakar ayam kokoh dengan besi ber-SNI, dinding double hebel plester aci, atap spandek/genteng beton, dan plafon gypsum tahan lama.</p>
                 </div>
                 <!-- Card 5 -->
-                <div class="bg-slate-800/50 border border-slate-800 p-8 rounded-3xl space-y-4 hover:border-brand-500/30 transition-all duration-300 group">
-                    <div class="w-12 h-12 rounded-2xl bg-brand-500/10 text-brand-400 flex items-center justify-center text-xl font-bold group-hover:bg-brand-500 group-hover:text-white transition-all duration-300">
-                        <i class="fa-solid fa-coins"></i>
+                <div class="bg-white border border-slate-200 p-8 rounded-3xl space-y-4 hover:border-brand-500/30 transition-all duration-300 group shadow-sm">
+                    <div class="w-12 h-12 rounded-2xl bg-brand-500 text-white flex items-center justify-center text-xl font-bold group-hover:scale-110 transition-all duration-300">
+                        <i class="fa-solid fa-coins text-accent-500"></i>
                     </div>
-                    <h4 class="text-xl font-bold text-white">Skema Pembayaran Fleksibel</h4>
-                    <p class="text-slate-400 text-sm leading-relaxed">Mendukung metode Cash Keras berdiskon besar, Cash Bertahap tanpa bunga langsung ke developer, serta KPR Bank Syariah dan Konvensional dengan DP rendah.</p>
+                    <h4 class="text-xl font-bold text-slate-900">Skema Pembayaran Fleksibel</h4>
+                    <p class="text-slate-500 text-sm leading-relaxed">Mendukung metode Cash Keras berdiskon besar, Cash Bertahap tanpa bunga langsung ke developer, serta KPR Bank Syariah dan Konvensional dengan DP rendah.</p>
                 </div>
                 <!-- Card 6 -->
-                <div class="bg-slate-800/50 border border-slate-800 p-8 rounded-3xl space-y-4 hover:border-brand-500/30 transition-all duration-300 group">
-                    <div class="w-12 h-12 rounded-2xl bg-brand-500/10 text-brand-400 flex items-center justify-center text-xl font-bold group-hover:bg-brand-500 group-hover:text-white transition-all duration-300">
-                        <i class="fa-solid fa-house-circle-check"></i>
+                <div class="bg-white border border-slate-200 p-8 rounded-3xl space-y-4 hover:border-brand-500/30 transition-all duration-300 group shadow-sm">
+                    <div class="w-12 h-12 rounded-2xl bg-brand-500 text-white flex items-center justify-center text-xl font-bold group-hover:scale-110 transition-all duration-300">
+                        <i class="fa-solid fa-house-circle-check text-accent-500"></i>
                     </div>
-                    <h4 class="text-xl font-bold text-white">Teknologi Smart Home</h4>
-                    <p class="text-slate-400 text-sm leading-relaxed">Unit premium kami telah terinstalasi sistem keamanan modern, kunci pintu digital (smart door lock), serta saklar nirkabel pintar yang terhubung ponsel.</p>
+                    <h4 class="text-xl font-bold text-slate-900">Teknologi Smart Home</h4>
+                    <p class="text-slate-500 text-sm leading-relaxed">Unit premium kami telah terinstalasi sistem keamanan modern, kunci pintu digital (smart door lock), serta saklar nirkabel pintar yang terhubung ponsel.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Section: Progres Pembangunan -->
-    <section id="galeri" class="py-24 bg-slate-50 border-t border-slate-100 scroll-mt-20">
+    <section id="galeri" class="py-24 bg-white border-t border-slate-100 scroll-mt-20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
                 <div class="space-y-3">
-                    <span class="text-sm font-bold text-brand-600 uppercase tracking-widest block">Progres Lapangan</span>
-                    <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">Galeri & Progres Pembangunan</h2>
+                    <span class="text-sm font-bold text-accent-600 uppercase tracking-widest block">Progres Lapangan</span>
+                    <h2 class="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">Galeri & Progres Pembangunan</h2>
                     <p class="text-slate-500 text-sm max-w-2xl">Dokumentasi transparansi pengerjaan unit dilapangan. Gunakan tombol editor untuk mengelola progres secara real-time.</p>
                 </div>
                 <!-- Admin Lock/Unlock Actions -->
                 <div class="flex flex-wrap gap-2 items-center">
-                    <button onclick="handleAdminBtnClick()" class="px-5 py-2.5 rounded-xl text-xs font-bold bg-slate-800 hover:bg-slate-900 text-white flex items-center gap-2 shadow-md transition-all" id="btn-admin-gate">
-                        <i class="fa-solid fa-lock" id="icon-admin-gate"></i>
+                    <button onclick="handleAdminBtnClick()" class="px-5 py-2.5 rounded-xl text-xs font-bold bg-brand-500 hover:bg-brand-600 text-white flex items-center gap-2 shadow-md transition-all" id="btn-admin-gate">
+                        <i class="fa-solid fa-lock text-accent-500" id="icon-admin-gate"></i>
                         <span id="admin-gate-text">Buka Modul Editor Foto</span>
                     </button>
                     <!-- Log Out Button -->
@@ -471,8 +567,8 @@
                     </button>
                     
                     <div class="text-center space-y-3 mb-6">
-                        <div class="w-14 h-14 bg-brand-100 text-brand-600 rounded-full flex items-center justify-center text-2xl mx-auto">
-                            <i class="fa-solid fa-shield-halved"></i>
+                        <div class="w-14 h-14 bg-brand-100 text-brand-500 rounded-full flex items-center justify-center text-2xl mx-auto border border-slate-200">
+                            <i class="fa-solid fa-shield-halved text-accent-500"></i>
                         </div>
                         <h3 class="text-xl font-bold text-slate-900">Verifikasi Akses Admin</h3>
                         <p class="text-xs text-slate-500 leading-relaxed">Akses modul ini dilindungi sandi untuk mencegah tindakan defacing, eksploitasi skrip (XSS), atau manipulasi visual ilegal.</p>
@@ -487,19 +583,19 @@
                                 <input type="password" id="admin-passcode-input" placeholder="••••••••" class="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 text-slate-800">
                             </div>
                         </div>
-                        <button onclick="verifyPasscode()" class="w-full py-3 bg-brand-600 hover:bg-brand-700 text-white font-bold rounded-xl text-sm transition-all shadow-md flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-unlock-keyhole"></i>
+                        <button onclick="verifyPasscode()" class="w-full py-3 bg-brand-500 hover:bg-brand-600 text-white font-bold rounded-xl text-sm transition-all shadow-md flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-unlock-keyhole text-accent-500"></i>
                             <span>Verifikasi & Masuk</span>
                         </button>
                     </div>
                 </div>
             </div>
 
-            <!-- Dynamic Admin Panel Module (Locked & Collapsed by default) -->
-            <div id="admin-panel" class="hidden mb-12 bg-white border border-brand-500/20 p-6 sm:p-8 rounded-3xl shadow-lg transition-all ring-1 ring-brand-500/20">
+            <!-- Dynamic Admin Panel Module -->
+            <div id="admin-panel" class="hidden mb-12 bg-white border border-slate-200 p-6 sm:p-8 rounded-3xl shadow-lg transition-all ring-1 ring-slate-100">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b pb-4 mb-6 gap-3">
-                    <h3 class="font-extrabold text-slate-900 text-lg flex items-center gap-2">
-                        <i class="fa-solid fa-user-shield text-brand-600"></i> Modul Pengelola Galeri (Terverifikasi Aman)
+                    <h3 class="font-black text-slate-900 text-lg flex items-center gap-2">
+                        <i class="fa-solid fa-user-shield text-brand-500"></i> Modul Pengelola Galeri (Terverifikasi Aman)
                     </h3>
                     <span class="px-2.5 py-1 text-xs font-bold bg-brand-100 text-brand-800 rounded-full flex items-center gap-1.5 w-fit">
                         <i class="fa-solid fa-circle text-[8px] text-emerald-500 animate-ping"></i> Sesi Admin Aktif
@@ -543,7 +639,7 @@
                         </div>
 
                         <div class="flex gap-2 pt-2">
-                            <button onclick="saveAdminPhoto()" class="flex-1 py-3 bg-brand-600 hover:bg-brand-700 text-white font-bold rounded-xl text-xs transition-all shadow-md">
+                            <button onclick="saveAdminPhoto()" class="flex-1 py-3 bg-brand-500 hover:bg-brand-600 text-white font-bold rounded-xl text-xs transition-all shadow-md">
                                 <span id="admin-save-btn">Simpan Foto Baru</span>
                             </button>
                             <button onclick="resetAdminForm()" class="px-4 py-3 bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold rounded-xl text-xs transition-all">
@@ -561,7 +657,7 @@
                                 <span>Salin Kode HTML Baru</span>
                             </button>
                         </div>
-                        <p class="text-xs text-slate-500 leading-relaxed">Saat Anda menambahkan/mengedit foto di modul ini, perubahan akan langsung diaplikasikan di preview web. Agar tersimpan selamanya, tekan tombol <strong>"Salin Kode HTML Baru"</strong> di atas, lalu timpa baris variabel <code>const GALLERY_ITEMS</code> pada script paling bawah file HTML Anda.</p>
+                        <p class="text-xs text-slate-500 leading-relaxed">Saat Anda menambahkan/mengedit foto di modul ini, perubahan akan langsung diaplikasikan di preview web. Agar tersimpan selamanya, tekan tombol <strong>"Salin Kode HTML Baru"</strong> di atas, lalu timpa baris variabel <code>let GALLERY_ITEMS</code> pada script paling bawah file HTML Anda.</p>
                         
                         <!-- List of current editable photos -->
                         <div class="space-y-2 max-h-[280px] overflow-y-auto pr-2" id="admin-item-list">
@@ -573,9 +669,9 @@
 
             <!-- Gallery filters -->
             <div class="flex flex-wrap items-center justify-center gap-2 mb-10">
-                <button onclick="filterGallery('all')" class="gallery-filter-btn px-5 py-2.5 rounded-xl text-xs font-bold bg-brand-600 text-white transition-all" id="gal-all">Semua Foto</button>
-                <button onclick="filterGallery('finish')" class="gallery-filter-btn px-5 py-2.5 rounded-xl text-xs font-bold bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 transition-all" id="gal-finish">Sudah Selesai</button>
-                <button onclick="filterGallery('progres')" class="gallery-filter-btn px-5 py-2.5 rounded-xl text-xs font-bold bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 transition-all" id="gal-progres">Sedang Dibangun</button>
+                <button onclick="filterGallery('all')" class="gallery-filter-btn px-5 py-2.5 rounded-xl text-xs font-bold bg-brand-500 text-white transition-all animate-none" id="gal-all">Semua Foto</button>
+                <button onclick="filterGallery('finish')" class="gallery-filter-btn px-5 py-2.5 rounded-xl text-xs font-bold bg-slate-100 text-slate-600 hover:bg-slate-200 border border-slate-200 transition-all" id="gal-finish">Sudah Selesai</button>
+                <button onclick="filterGallery('progres')" class="gallery-filter-btn px-5 py-2.5 rounded-xl text-xs font-bold bg-slate-100 text-slate-600 hover:bg-slate-200 border border-slate-200 transition-all" id="gal-progres">Sedang Dibangun</button>
             </div>
 
             <!-- Gallery Grid -->
@@ -585,105 +681,118 @@
         </div>
     </section>
 
-    <!-- Section: Kontak & Maps -->
-    <section id="kontak" class="py-24 bg-slate-900 text-white scroll-mt-20">
+    <!-- Section: Kontak & Maps (Transformed to elegant light theme) -->
+    <section id="kontak" class="py-24 bg-slate-50 text-slate-800 scroll-mt-20 border-t border-b border-slate-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
                 
                 <!-- Left: Contact Details & Map Info -->
                 <div class="lg:col-span-5 space-y-8">
                     <div class="space-y-3">
-                        <span class="text-sm font-bold text-brand-400 uppercase tracking-widest block">Hubungi Tim Marketing</span>
-                        <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">Mari Konsultasikan Kebutuhan Anda</h2>
-                        <p class="text-slate-400 text-sm">Konsultasi gratis, kunjungan lokasi proyek, atau simulasi cicilan langsung dibantu marketing executive kami 24/7.</p>
+                        <span class="text-sm font-bold text-accent-600 uppercase tracking-widest block">Hubungi Tim Marketing</span>
+                        <h2 class="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">Mari Konsultasikan Kebutuhan Anda</h2>
+                        <p class="text-slate-500 text-sm">Konsultasi gratis, kunjungan lokasi proyek, atau bimbingan pendampingan bisnis korporasi langsung dipandu oleh tim ahli kami.</p>
                     </div>
 
                     <!-- Contact Channels -->
                     <div class="space-y-6">
                         <div class="flex items-start gap-4">
-                            <div class="w-10 h-10 rounded-xl bg-brand-500/10 text-brand-400 flex items-center justify-center shrink-0"><i class="fa-solid fa-map-location-dot"></i></div>
+                            <div class="w-10 h-10 rounded-xl bg-brand-500 text-white flex items-center justify-center shrink-0 shadow-md">
+                                <i class="fa-solid fa-map-location-dot text-accent-500"></i>
+                            </div>
                             <div>
-                                <h4 class="font-bold text-sm text-slate-200">Kantor Pemasaran Pusat (Sleman)</h4>
-                                <p class="text-xs text-slate-400 mt-1">Jl. Turgo, Sinduharjo, Ngaglik, Sleman, D.I. Yogyakarta 55581</p>
+                                <h4 class="font-bold text-sm text-slate-900">Kantor Pemasaran & Operasional Utama</h4>
+                                <p class="text-xs text-slate-500 mt-1">Jalan Raya Ciseeng, Putat Nutug Kel., Ciseeng, Bogor Kabupaten, 16384, Indonesia</p>
                             </div>
                         </div>
                         <div class="flex items-start gap-4">
-                            <div class="w-10 h-10 rounded-xl bg-brand-500/10 text-brand-400 flex items-center justify-center shrink-0"><i class="fa-solid fa-house-flag"></i></div>
+                            <div class="w-10 h-10 rounded-xl bg-brand-500 text-white flex items-center justify-center shrink-0 shadow-md">
+                                <i class="fa-solid fa-phone text-accent-500"></i>
+                            </div>
                             <div>
-                                <h4 class="font-bold text-sm text-slate-200">Kantor Pemasaran Cabang (Bogor)</h4>
-                                <p class="text-xs text-slate-400 mt-1">Kawasan Kemang, Bogor Regency, Jawa Barat 16310</p>
+                                <h4 class="font-bold text-sm text-slate-900">Telepon & WhatsApp Resmi</h4>
+                                <p class="text-xs text-slate-500 mt-1">+62 895-3590-48761</p>
                             </div>
                         </div>
                         <div class="flex items-start gap-4">
-                            <div class="w-10 h-10 rounded-xl bg-brand-500/10 text-brand-400 flex items-center justify-center shrink-0"><i class="fa-solid fa-phone"></i></div>
+                            <div class="w-10 h-10 rounded-xl bg-brand-500 text-white flex items-center justify-center shrink-0 shadow-md">
+                                <i class="fa-solid fa-envelope text-accent-500"></i>
+                            </div>
                             <div>
-                                <h4 class="font-bold text-sm text-slate-200">Telepon & WhatsApp</h4>
-                                <p class="text-xs text-slate-400 mt-1">0274-4361589 / +62 895-3590-48761</p>
+                                <h4 class="font-bold text-sm text-slate-900">Alamat Email</h4>
+                                <p class="text-xs text-slate-500 mt-1">admin@cbcproperty.co.id / adm.cbcpro@gmail.com</p>
                             </div>
                         </div>
                         <div class="flex items-start gap-4">
-                            <div class="w-10 h-10 rounded-xl bg-brand-500/10 text-brand-400 flex items-center justify-center shrink-0"><i class="fa-solid fa-envelope"></i></div>
+                            <div class="w-10 h-10 rounded-xl bg-brand-500 text-white flex items-center justify-center shrink-0 shadow-md">
+                                <i class="fa-solid fa-clock text-accent-500"></i>
+                            </div>
                             <div>
-                                <h4 class="font-bold text-sm text-slate-200">Alamat Email Resmi</h4>
-                                <p class="text-xs text-slate-400 mt-1">admin@cbcproperty.co.id / adm.cbcpro@gmail.com</p>
+                                <h4 class="font-bold text-sm text-slate-900">Jam Operasional Kantor (Sesuai Profil)</h4>
+                                <div class="text-xs text-slate-500 mt-1 space-y-0.5">
+                                    <p>Rabu: 09.00 – 17.00</p>
+                                    <p>Kamis: 09.00 – 14.00</p>
+                                    <p class="text-red-600 font-semibold">Jumat & Sabtu: Tutup</p>
+                                    <p class="text-amber-600 font-semibold">Minggu: Survey Lokasi (Dengan Janji Temu)</p>
+                                </div>
                             </div>
                         </div>
                     </div>
 
                     <!-- Interactive Map Container -->
                     <div class="space-y-2">
-                        <span class="text-xs text-slate-400 font-bold uppercase tracking-wider block">Lokasi Geografis Sleman Office:</span>
-                        <div id="map" class="w-full h-48 rounded-2xl border border-slate-800 shadow-lg relative overflow-hidden z-20"></div>
+                        <span class="text-xs text-slate-500 font-bold uppercase tracking-wider block">Lokasi Geografis Kantor Ciseeng:</span>
+                        <div id="map" class="w-full h-56 rounded-3xl border border-slate-200 shadow-md relative overflow-hidden z-10"></div>
                     </div>
                 </div>
 
                 <!-- Right: Active Direct Contact Message Form -->
-                <div class="lg:col-span-7 bg-slate-800/60 border border-slate-800 p-6 sm:p-10 rounded-3xl shadow-xl space-y-6">
-                    <h3 class="text-xl font-bold text-white flex items-center gap-2"><i class="fa-solid fa-paper-plane text-brand-400"></i> Kirim Pesan Langsung</h3>
+                <div class="lg:col-span-7 bg-white border border-slate-200 p-6 sm:p-10 rounded-3xl shadow-lg space-y-6">
+                    <h3 class="text-xl font-bold text-slate-900 flex items-center gap-2"><i class="fa-solid fa-paper-plane text-accent-600"></i> Kirim Pesan Langsung</h3>
                     
                     <form id="contact-form" onsubmit="handleContactSubmit(event)" class="space-y-4">
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div class="space-y-1.5">
-                                <label for="form-name" class="text-xs text-slate-300 font-semibold">Nama Lengkap</label>
-                                <input type="text" id="form-name" required placeholder="Contoh: Budi Santoso" class="w-full px-4 py-3 bg-slate-900 border border-slate-700/50 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 text-white placeholder-slate-500">
+                                <label for="form-name" class="text-xs text-slate-600 font-semibold">Nama Lengkap</label>
+                                <input type="text" id="form-name" required placeholder="Contoh: Budi Santoso" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 text-slate-800 placeholder-slate-400">
                             </div>
                             <div class="space-y-1.5">
-                                <label for="form-whatsapp" class="text-xs text-slate-300 font-semibold">Nomor WhatsApp / HP</label>
-                                <input type="tel" id="form-whatsapp" required placeholder="Contoh: 0812XXXXXXXX" class="w-full px-4 py-3 bg-slate-900 border border-slate-700/50 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 text-white placeholder-slate-500">
+                                <label for="form-whatsapp" class="text-xs text-slate-600 font-semibold">Nomor WhatsApp / HP</label>
+                                <input type="tel" id="form-whatsapp" required placeholder="Contoh: 0812XXXXXXXX" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 text-slate-800 placeholder-slate-400">
                             </div>
                         </div>
 
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div class="space-y-1.5">
-                                <label for="form-interest" class="text-xs text-slate-300 font-semibold">Minat Unit Properti</label>
-                                <select id="form-interest" class="w-full px-4 py-3 bg-slate-900 border border-slate-700/50 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 text-white appearance-none">
-                                    <option value="Tanya Umum">Tanya Umum / Konsultasi Bebas</option>
-                                    <option value="Kemang Verde Residence">Kemang Verde Residence (Kemang)</option>
+                                <label for="form-interest" class="text-xs text-slate-600 font-semibold">Minat Unit / Layanan</label>
+                                <select id="form-interest" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 text-slate-800 appearance-none">
+                                    <option value="Tanya Umum">Tanya Umum / Konsultasi Properti</option>
+                                    <option value="Konsultasi Hukum">Konsultasi Hukum / Perdata Tanah</option>
+                                    <option value="Konsultasi Bisnis">Konsultasi Bisnis / Legalitas Perusahaan</option>
+                                    <option value="Konsultasi IT & Robotik">Solusi IT & Robotik</option>
                                     <option value="Areum Parc Luxury">Areum Parc Luxury (Kemang)</option>
                                     <option value="Taman Pagelaran Ciomas">Taman Pagelaran Ciomas (Ciomas)</option>
                                     <option value="Nanggela Hill's Residence">Nanggela Hill's Residence (Bojonggede)</option>
-                                    <option value="Grand Cibinong Estate">Grand Cibinong Estate (Cibinong)</option>
-                                    <option value="KGI Kemang Premium">KGI Kemang Premium (Kemang)</option>
                                 </select>
                             </div>
                             <div class="space-y-1.5">
-                                <label for="form-payment" class="text-xs text-slate-300 font-semibold">Rencana Skema Bayar</label>
-                                <select id="form-payment" class="w-full px-4 py-3 bg-slate-900 border border-slate-700/50 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 text-white appearance-none">
-                                    <option value="KPR Syariah / Konvensional">KPR Syariah / Konvensional</option>
-                                    <option value="Cash Bertahap">Cash Bertahap (Langsung Developer)</option>
+                                <label for="form-payment" class="text-xs text-slate-600 font-semibold">Rencana Skema Bayar</label>
+                                <select id="form-payment" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 text-slate-800 appearance-none">
                                     <option value="Cash Keras">Cash Keras (Diskon Spesial)</option>
+                                    <option value="Cash Bertahap">Cash Bertahap (Tanpa Bunga)</option>
+                                    <option value="KPR Syariah">KPR Syariah / Lembaga Syariah</option>
                                 </select>
                             </div>
                         </div>
 
                         <div class="space-y-1.5">
-                            <label for="form-message" class="text-xs text-slate-300 font-semibold">Pesan / Pertanyaan Detail</label>
-                            <textarea id="form-message" rows="4" required placeholder="Tuliskan pertanyaan spesifik Anda, misal: 'Saya ingin survey lokasi hari Sabtu ini apakah bisa?'" class="w-full px-4 py-3 bg-slate-900 border border-slate-700/50 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 text-white placeholder-slate-500"></textarea>
+                            <label for="form-message" class="text-xs text-slate-600 font-semibold">Pesan / Pertanyaan Detail</label>
+                            <textarea id="form-message" rows="4" required placeholder="Tuliskan pertanyaan spesifik Anda..." class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 text-slate-800 placeholder-slate-400"></textarea>
                         </div>
 
                         <div class="pt-2">
-                            <button type="submit" class="w-full py-4 bg-brand-600 hover:bg-brand-700 text-white font-bold text-sm rounded-xl transition-all shadow-lg shadow-brand-600/15 flex items-center justify-center gap-2">
-                                <i class="fa-brands fa-whatsapp text-lg"></i>
+                            <button type="submit" class="w-full py-4 bg-brand-500 hover:bg-brand-600 text-white font-bold text-sm rounded-xl transition-all shadow-lg shadow-brand-500/10 flex items-center justify-center gap-2">
+                                <i class="fa-brands fa-whatsapp text-lg text-accent-500"></i>
                                 <span>Kirim Form via WhatsApp</span>
                             </button>
                         </div>
@@ -694,74 +803,81 @@
         </div>
     </section>
 
-    <!-- Footer Section -->
-    <footer class="bg-slate-950 text-slate-400 text-sm py-12 border-t border-slate-900">
+    <!-- Footer Section (Transformed to Premium Light/White Theme) -->
+    <footer class="bg-white text-slate-600 text-sm py-12 border-t border-slate-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
                 <!-- Brand Profile -->
                 <div class="space-y-4">
                     <div class="flex items-center space-x-3">
-                        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-accent-500 flex items-center justify-center text-white font-bold text-xl">
-                            C
+                        <div class="w-12 h-12 shrink-0 flex items-center justify-center bg-white p-0.5 rounded-xl shadow-sm border border-slate-100">
+                            <svg class="w-full h-full" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M60 135C40.67 135 25 119.33 25 100C25 80.67 40.67 65 60 65C69.33 65 77.5 68.67 83.5 74.67" stroke="#0c2340" stroke-width="16" stroke-linecap="round"/>
+                                <path d="M140 65C159.33 65 175 80.67 175 100C175 119.33 159.33 135 140 135C130.67 135 122.5 131.33 116.5 125.33" stroke="#0c2340" stroke-width="16" stroke-linecap="round"/>
+                                <path d="M85 140V55L108 40V140H85Z" fill="#0c2340"/>
+                                <path d="M108 140V70L125 58V140H108Z" fill="#0c2340" opacity="0.8"/>
+                                <path d="M88 65H110C118.28 65 125 71.72 125 80C125 88.28 118.28 95 110 95H88" stroke="#d4af37" stroke-width="12" stroke-linecap="round"/>
+                                <path d="M88 95H114C122.28 95 129 101.72 129 110C129 118.28 122.28 125 114 125H88" stroke="#d4af37" stroke-width="12" stroke-linecap="round"/>
+                                <line x1="88" y1="58" x2="88" y2="135" stroke="#d4af37" stroke-width="12" stroke-linecap="round"/>
+                            </svg>
                         </div>
                         <div class="flex flex-col">
-                            <span class="font-extrabold text-white text-lg tracking-tight leading-none">PT CBC PROPERTY</span>
-                            <span class="text-xs text-brand-500 font-semibold tracking-wider uppercase mt-1">Property Development</span>
+                            <span class="font-extrabold text-slate-900 text-base tracking-tight leading-none">PT CBC PROPERTY</span>
+                            <span class="text-[10px] text-accent-600 font-semibold tracking-wider uppercase mt-1">Property & Multi-Consulting</span>
                         </div>
                     </div>
-                    <p class="text-xs text-slate-400 leading-relaxed">Penyedia hunian modern berorientasi masa depan yang ramah lingkungan, kokoh, dan berlegalitas clear sejak 2014.</p>
+                    <p class="text-xs text-slate-500 leading-relaxed">Penyedia aset properti masa depan bernilai tinggi serta layanan konsultasi bisnis terpadu berlisensi resmi sejak 2014.</p>
                 </div>
 
                 <!-- Navigation Quick Links -->
                 <div class="space-y-4">
-                    <h4 class="text-slate-200 font-bold text-xs uppercase tracking-widest">Tautan Navigasi</h4>
-                    <ul class="space-y-2.5 text-xs">
-                        <li><a href="#home" class="hover:text-brand-400 transition-colors">Beranda</a></li>
-                        <li><a href="#tentang" class="hover:text-brand-400 transition-colors">Tentang Kami</a></li>
-                        <li><a href="#unit" class="hover:text-brand-400 transition-colors">Unit Properti</a></li>
-                        <li><a href="#keunggulan" class="hover:text-brand-400 transition-colors">Keunggulan Layanan</a></li>
-                        <li><a href="#galeri" class="hover:text-brand-400 transition-colors">Progres Galeri</a></li>
+                    <h4 class="text-slate-900 font-bold text-xs uppercase tracking-widest">Tautan Navigasi</h4>
+                    <ul class="space-y-2.5 text-xs font-semibold">
+                        <li><a href="#home" class="hover:text-brand-500 transition-colors">Beranda</a></li>
+                        <li><a href="#tentang" class="hover:text-brand-500 transition-colors">Tentang Kami</a></li>
+                        <li><a href="#layanan" class="hover:text-brand-500 transition-colors">Layanan Multidisiplin</a></li>
+                        <li><a href="#unit" class="hover:text-brand-500 transition-colors">Unit Properti</a></li>
+                        <li><a href="#galeri" class="hover:text-brand-500 transition-colors">Progres Galeri</a></li>
                     </ul>
                 </div>
 
                 <!-- Project Locations -->
                 <div class="space-y-4">
-                    <h4 class="text-slate-200 font-bold text-xs uppercase tracking-widest">Cakupan Wilayah Proyek</h4>
-                    <ul class="space-y-2.5 text-xs">
-                        <li><span class="hover:text-brand-400 transition-colors">Kemang (Kab. Bogor)</span></li>
-                        <li><span class="hover:text-brand-400 transition-colors">Ciomas (Kab. Bogor)</span></li>
-                        <li><span class="hover:text-brand-400 transition-colors">Bojonggede (Kab. Bogor)</span></li>
-                        <li><span class="hover:text-brand-400 transition-colors">Cibinong (Kota/Pemda Bogor)</span></li>
-                        <li><span class="hover:text-brand-400 transition-colors">Sleman (D.I. Yogyakarta)</span></li>
+                    <h4 class="text-slate-900 font-bold text-xs uppercase tracking-widest">Cakupan Wilayah</h4>
+                    <ul class="space-y-2.5 text-xs text-slate-500 font-semibold">
+                        <li><span class="hover:text-brand-500 transition-colors">Ciseeng (Kab. Bogor)</span></li>
+                        <li><span class="hover:text-brand-500 transition-colors">Kemang (Kab. Bogor)</span></li>
+                        <li><span class="hover:text-brand-500 transition-colors">Ciomas (Kab. Bogor)</span></li>
+                        <li><span class="hover:text-brand-500 transition-colors">Bojonggede (Kab. Bogor)</span></li>
+                        <li><span class="hover:text-brand-500 transition-colors">Cibinong (Kota Bogor)</span></li>
                     </ul>
                 </div>
 
                 <!-- Operational & Social media -->
                 <div class="space-y-4">
-                    <h4 class="text-slate-200 font-bold text-xs uppercase tracking-widest">Waktu Operasional</h4>
-                    <p class="text-xs text-slate-400">Senin - Jumat: 08:00 - 17:00 WIB<br>Sabtu - Minggu: 09:00 - 15:00 (Hanya Survey Lokasi)</p>
+                    <h4 class="text-slate-900 font-bold text-xs uppercase tracking-widest">Waktu Operasional</h4>
+                    <p class="text-xs text-slate-500 leading-relaxed">Rabu: 09:00 - 17:00 WIB<br>Kamis: 09:00 - 14:00 WIB<br><span class="text-red-600 font-semibold">Jumat & Sabtu: Tutup</span></p>
                     <!-- Social Media Handles -->
                     <div class="flex gap-3 pt-2">
-                        <a href="#" class="w-8 h-8 rounded-lg bg-slate-900 hover:bg-brand-600 text-white flex items-center justify-center transition-all"><i class="fa-brands fa-facebook-f text-xs"></i></a>
-                        <a href="https://www.instagram.com" target="_blank" class="w-8 h-8 rounded-lg bg-slate-900 hover:bg-brand-600 text-white flex items-center justify-center transition-all"><i class="fa-brands fa-instagram text-xs"></i></a>
-                        <a href="#" class="w-8 h-8 rounded-lg bg-slate-900 hover:bg-brand-600 text-white flex items-center justify-center transition-all"><i class="fa-brands fa-tiktok text-xs"></i></a>
-                        <a href="https://wa.me/628161988979" target="_blank" class="w-8 h-8 rounded-lg bg-slate-900 hover:bg-brand-600 text-white flex items-center justify-center transition-all"><i class="fa-brands fa-whatsapp text-xs"></i></a>
+                        <a href="#" class="w-8 h-8 rounded-lg bg-slate-100 hover:bg-brand-500 hover:text-white text-slate-800 flex items-center justify-center transition-all shadow-sm"><i class="fa-brands fa-facebook-f text-xs"></i></a>
+                        <a href="https://www.instagram.com" target="_blank" class="w-8 h-8 rounded-lg bg-slate-100 hover:bg-brand-500 hover:text-white text-slate-800 flex items-center justify-center transition-all shadow-sm"><i class="fa-brands fa-instagram text-xs"></i></a>
+                        <a href="https://wa.me/62895359048761" target="_blank" class="w-8 h-8 rounded-lg bg-slate-100 hover:bg-brand-500 hover:text-white text-slate-800 flex items-center justify-center transition-all shadow-sm"><i class="fa-brands fa-whatsapp text-xs"></i></a>
                     </div>
                 </div>
             </div>
 
-            <div class="border-t border-slate-900 pt-8 flex flex-col sm:flex-row justify-between items-center text-xs text-slate-500 gap-4">
+            <div class="border-t border-slate-200 pt-8 flex flex-col sm:flex-row justify-between items-center text-xs text-slate-400 gap-4">
                 <p>&copy; 2026 PT CBC PROPERTY. Hak Cipta Dilindungi.</p>
                 <div class="flex gap-4">
-                    <a href="#" class="hover:text-slate-300">Syarat & Ketentuan</a>
-                    <a href="#" class="hover:text-slate-300">Kebijakan Privasi</a>
+                    <a href="#" class="hover:text-slate-600">Syarat & Ketentuan</a>
+                    <a href="#" class="hover:text-slate-600">Kebijakan Privasi</a>
                 </div>
             </div>
         </div>
     </footer>
 
     <!-- Floating Quick Actions -->
-    <a href="https://wa.me/628161988979?text=Halo%20PT%20CBC%20PROPERTY" target="_blank" class="fixed bottom-6 right-6 z-40 w-14 h-14 bg-emerald-500 text-white rounded-full flex items-center justify-center shadow-2xl hover:bg-emerald-600 transition-transform hover:scale-110" title="Hubungi via WhatsApp">
+    <a href="https://wa.me/62895359048761?text=Halo%20PT%20CBC%20PROPERTY" target="_blank" class="fixed bottom-6 right-6 z-40 w-14 h-14 bg-emerald-500 text-white rounded-full flex items-center justify-center shadow-2xl hover:bg-emerald-600 transition-transform hover:scale-110" title="Hubungi via WhatsApp">
         <i class="fa-brands fa-whatsapp text-2xl"></i>
     </a>
 
@@ -908,8 +1024,8 @@
         function logoutAdmin() {
             sessionStorage.removeItem('tra_admin_auth');
             document.getElementById('admin-panel').classList.add('hidden');
-            document.getElementById('btn-admin-gate').className = "px-5 py-2.5 rounded-xl text-xs font-bold bg-slate-800 hover:bg-slate-900 text-white flex items-center gap-2 shadow-md transition-all";
-            document.getElementById('icon-admin-gate').className = "fa-solid fa-lock";
+            document.getElementById('btn-admin-gate').className = "px-5 py-2.5 rounded-xl text-xs font-bold bg-brand-500 hover:bg-brand-600 text-white flex items-center gap-2 shadow-md transition-all";
+            document.getElementById('icon-admin-gate').className = "fa-solid fa-lock text-accent-500";
             document.getElementById('admin-gate-text').innerText = "Buka Modul Editor Foto";
             document.getElementById('btn-admin-logout').classList.add('hidden');
             resetAdminForm();
@@ -922,7 +1038,7 @@
                 id: "p1",
                 name: "Kemang Verde Residence",
                 location: "kemang",
-                locationName: "Kemang, Bogor",
+                locationName: "Ciseeng, Bogor",
                 price: 395000000,
                 priceDisplay: "Rp 395 Juta",
                 monthlyEst: "Rp 2,8 Jt/bln",
@@ -933,14 +1049,14 @@
                 baths: 1,
                 legal: "SHM & PBG Ready",
                 image: "https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=800&q=80",
-                desc: "Kemang Verde Residence menawarkan konsep hunian mezzanine eksklusif dengan harga terjangkau. Memiliki sirkulasi udara optimal dan pencahayaan matahari alami yang melimpah.",
+                desc: "Kemang Verde Residence menawarkan konsep hunian mezzanine eksklusif dengan harga terjangkau di kawasan Ciseeng. Memiliki sirkulasi udara optimal dan pencahayaan matahari alami yang melimpah.",
                 features: ["Double Dinding Hebel", "Plafond Gypsum", "Sumur Bor Pompa Air", "Listrik 1300 Watt", "Taman Belakang"]
             },
             {
                 id: "p2",
                 name: "Areum Parc Luxury",
                 location: "kemang",
-                locationName: "Kemang, Bogor",
+                locationName: "Ciseeng, Bogor",
                 price: 750000000,
                 priceDisplay: "Rp 750 Juta",
                 monthlyEst: "Rp 5,1 Jt/bln",
@@ -1007,71 +1123,16 @@
                 image: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=800&q=80",
                 desc: "Hunian strategis dekat dengan kawasan Pusat Pemerintahan Bogor (Pemda). Cluster premium bernilai investasi tinggi, dengan sistem air bersih mandiri.",
                 features: ["Keamanan 24 Jam", "Sistem Selokan Tertutup", "Instalasi AC di Setiap Kamar", "Sanitary Kloset Duduk Toto", "Dekat Rumah Sakit"]
-            },
-            {
-                id: "p6",
-                name: "KGI Kemang Premium",
-                location: "kemang",
-                locationName: "Kemang, Bogor",
-                price: 890000000,
-                priceDisplay: "Rp 890 Juta",
-                monthlyEst: "Rp 6,1 Jt/bln",
-                type: "Smart Home Mezzanine",
-                lt: 90,
-                lb: 65,
-                beds: 3,
-                baths: 2,
-                legal: "SHM & PBG Lengkap",
-                image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80",
-                desc: "Cluster premium KGI Kemang menawarkan rumah dengan konsep modern berplafon tinggi. Memungkinkan perluasan mezzanine lanjutan untuk ruang kerja atau kamar bermain anak.",
-                features: ["Sistem Autogate Kompleks", "Listrik 2200 Watt", "High Ceiling 4.5 Meter", "Dapur Minimalis Kitchen Island", "Kabel Fiber Optik Internet"]
             }
         ];
 
         /* Gallery Database Array - Protected with manual validation & sanitized outputs */
         let GALLERY_ITEMS = [
-            {
-                    "id": "g1",
-                    "type": "finish",
-                    "title": "Fasad Utama Areum Parc",
-                    "desc": "Selesai 100% - Serah terima unit",
-                    "image": "https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=800&q=80"
-          },
-          {
-                    "id": "g2",
-                    "type": "finish",
-                    "title": "Pengecoran Pondasi KGI Kemang",
-                    "desc": "Tahap struktur beton & tiang pancang",
-                    "image": "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=800&q=80"
-          },
-          {
-                    "id": "g3",
-                    "type": "finish",
-                    "title": "Interior Ruang Tamu Nanggela Hill's",
-                    "desc": "Desain custom bergaya industrial",
-                    "image": "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=800&q=80"
-          },
-          {
-                    "id": "g4",
-                    "type": "finish",
-                    "title": "Plester Dinding Cluster Ciomas",
-                    "desc": "Tahap acian dan plester hebel ganda",
-                    "image": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80"
-          },
-          {
-                    "id": "g5",
-                    "type": "finish",
-                    "title": "Master Bedroom Grand Cibinong",
-                    "desc": "Selesai pengerjaan interior & wardrobe",
-                    "image": "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?auto=format&fit=crop&w=800&q=80"
-          },
-          {
-                    "id": "g6",
-                    "type": "finish",
-                    "title": "Pemasangan Atap Baja Ringan",
-                    "desc": "Pemasangan baja ringan bergaransi SNI",
-                    "image": "https://images.unsplash.com/photo-1581094288338-2314dddb7eed?auto=format&fit=crop&w=800&q=80"
-          }
+            { id: "g1", type: "finish", title: "Fasad Utama Areum Parc", desc: "Selesai 100% - Serah terima unit", image: "https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=800&q=80" },
+            { id: "g2", type: "progres", title: "Pengecoran Pondasi Ciseeng", desc: "Tahap struktur beton & tiang pancang", image: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=800&q=80" },
+            { id: "g3", type: "finish", title: "Interior Ruang Tamu Nanggela", desc: "Desain custom bergaya industrial", image: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=800&q=80" },
+            { id: "g4", type: "progres", title: "Plester Dinding Cluster Ciomas", desc: "Tahap acian dan plester hebel ganda", image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80" },
+            { id: "g5", type: "finish", title: "Master Bedroom Grand Cibinong", desc: "Selesai pengerjaan interior & wardrobe", image: "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?auto=format&fit=crop&w=800&q=80" }
         ];
 
         let currentGalleryFilter = 'all';
@@ -1094,9 +1155,9 @@
             window.addEventListener('scroll', function() {
                 const header = document.getElementById('main-header');
                 if (window.scrollY > 50) {
-                    header.classList.add('glassmorphism', 'shadow-lg');
+                    header.classList.add('glassmorphism-light', 'shadow-lg');
                 } else {
-                    header.classList.remove('glassmorphism', 'shadow-lg');
+                    header.classList.remove('glassmorphism-light', 'shadow-lg');
                 }
             });
 
@@ -1143,7 +1204,7 @@
 
             list.forEach(prop => {
                 const card = document.createElement('div');
-                card.className = "bg-white border border-slate-100 rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 flex flex-col group";
+                card.className = "bg-white border border-slate-200 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col group";
                 
                 // Securely sanitized variables to prevent HTML Injection
                 const safeName = sanitizeHTML(prop.name);
@@ -1158,33 +1219,33 @@
                 card.innerHTML = `
                     <div class="relative overflow-hidden h-56 shrink-0">
                         <img src="${safeImageUrl}" alt="${safeName}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.onerror=null; this.src='https://placehold.co/600x400/eceff1/37474f?text=Foto+TRA'">
-                        <span class="absolute top-4 left-4 px-3 py-1 bg-brand-600 text-white font-bold text-xs rounded-lg shadow-sm">${safeType}</span>
+                        <span class="absolute top-4 left-4 px-3 py-1 bg-brand-500 text-white font-bold text-xs rounded-lg shadow-sm">${safeType}</span>
                         <span class="absolute bottom-4 right-4 px-3 py-1 bg-slate-900/80 text-white font-semibold text-xs rounded-lg backdrop-blur-xs"><i class="fa-solid fa-map-pin mr-1 text-accent-500"></i> ${safeLocation}</span>
                     </div>
 
                     <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
                         <div class="space-y-2">
                             <div class="flex items-center justify-between">
-                                <span class="text-xs text-brand-600 font-bold tracking-wide uppercase flex items-center gap-1">
-                                    <i class="fa-solid fa-shield-halved text-[10px]"></i> ${safeLegal}
+                                <span class="text-xs text-brand-500 font-bold tracking-wide uppercase flex items-center gap-1">
+                                    <i class="fa-solid fa-shield-halved text-[10px] text-accent-500"></i> ${safeLegal}
                                 </span>
                                 <span class="text-xs text-slate-400 font-medium">Cicilan Mulai ${safeMonthlyEst}</span>
                             </div>
-                            <h3 class="font-extrabold text-slate-900 text-lg sm:text-xl group-hover:text-brand-600 transition-colors">${safeName}</h3>
+                            <h3 class="font-extrabold text-slate-900 text-lg sm:text-xl group-hover:text-brand-500 transition-colors">${safeName}</h3>
                             <p class="text-xs text-slate-500 line-clamp-2">${safeDesc}</p>
                         </div>
 
                         <div class="grid grid-cols-3 gap-2 py-3 border-t border-b border-slate-100 text-xs text-slate-600">
                             <div class="flex items-center gap-1.5" title="Luas Tanah">
-                                <i class="fa-solid fa-maximize text-slate-400"></i>
+                                <i class="fa-solid fa-maximize text-accent-600"></i>
                                 <span>LT: ${prop.lt} m²</span>
                             </div>
                             <div class="flex items-center gap-1.5" title="Luas Bangunan">
-                                <i class="fa-solid fa-house-chimney text-slate-400"></i>
+                                <i class="fa-solid fa-house-chimney text-accent-600"></i>
                                 <span>LB: ${prop.lb} m²</span>
                             </div>
                             <div class="flex items-center gap-1.5" title="Kamar">
-                                <i class="fa-solid fa-bed text-slate-400"></i>
+                                <i class="fa-solid fa-bed text-accent-600"></i>
                                 <span>${prop.beds}KT / ${prop.baths}KM</span>
                             </div>
                         </div>
@@ -1198,8 +1259,8 @@
                                 <button onclick="openPropertyDetail('${safeName}')" class="px-3.5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs rounded-xl transition-all" title="Detail Unit">
                                     Detail
                                 </button>
-                                <button onclick="bookingProperty('${safeName}')" class="px-4 py-2.5 bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs rounded-xl transition-all flex items-center gap-1.5 shadow-sm shadow-brand-600/10">
-                                    <i class="fa-solid fa-bookmark text-[10px]"></i>
+                                <button onclick="bookingProperty('${safeName}')" class="px-4 py-2.5 bg-brand-500 hover:bg-brand-600 text-white font-bold text-xs rounded-xl transition-all flex items-center gap-1.5 shadow-sm shadow-brand-500/10">
+                                    <i class="fa-solid fa-bookmark text-[10px] text-accent-500"></i>
                                     <span>Pesan</span>
                                 </button>
                             </div>
@@ -1214,12 +1275,12 @@
         function filterCategory(category) {
             const buttons = document.querySelectorAll('.category-btn');
             buttons.forEach(btn => {
-                btn.className = "category-btn px-5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 bg-white text-slate-600 hover:bg-slate-100 border border-slate-200";
+                btn.className = "category-btn px-5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 bg-slate-100 text-slate-600 hover:bg-slate-200 border border-slate-200";
             });
 
             const activeBtn = document.getElementById(`cat-${category}`);
             if (activeBtn) {
-                activeBtn.className = "category-btn px-5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 bg-brand-600 text-white";
+                activeBtn.className = "category-btn px-5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 bg-brand-500 text-white";
             }
 
             if (category === 'all') {
@@ -1278,7 +1339,7 @@
 
             filteredItems.forEach(item => {
                 const card = document.createElement('div');
-                card.className = "bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm relative group cursor-pointer hover:shadow-md transition-all duration-300";
+                card.className = "bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm relative group cursor-pointer hover:shadow-md transition-all duration-300";
                 
                 // XSS Defense: sanitize variables
                 const safeTitle = sanitizeHTML(item.title);
@@ -1291,8 +1352,8 @@
                         <img src="${safeImage}" alt="${safeTitle}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.onerror=null; this.src='https://placehold.co/600x400/eceff1/37474f?text=Foto+Progres+TRA'">
                         <span class="absolute top-4 left-4 px-2.5 py-1 text-[10px] font-extrabold uppercase tracking-wide rounded-lg text-white ${safeType === 'finish' ? 'bg-emerald-600 shadow-md' : 'bg-amber-500 shadow-md'}">${safeType === 'finish' ? 'Sudah Selesai' : 'Sedang Dibangun'}</span>
                     </div>
-                    <div class="p-4 bg-white border-t border-slate-50">
-                        <h4 class="font-bold text-slate-900 text-sm group-hover:text-brand-600 transition-colors">${safeTitle}</h4>
+                    <div class="p-4 bg-white border-t border-slate-100">
+                        <h4 class="font-bold text-slate-900 text-sm group-hover:text-brand-500 transition-colors">${safeTitle}</h4>
                         <p class="text-xs text-slate-500 mt-0.5">${safeDesc}</p>
                     </div>
                 `;
@@ -1305,12 +1366,12 @@
             currentGalleryFilter = type;
             const buttons = document.querySelectorAll('.gallery-filter-btn');
             buttons.forEach(btn => {
-                btn.className = "gallery-filter-btn px-5 py-2.5 rounded-xl text-xs font-bold bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 transition-all";
+                btn.className = "gallery-filter-btn px-5 py-2.5 rounded-xl text-xs font-bold bg-slate-100 text-slate-600 hover:bg-slate-200 border border-slate-200 transition-all";
             });
 
             const activeBtn = document.getElementById(`gal-${type}`);
             if (activeBtn) {
-                activeBtn.className = "gallery-filter-btn px-5 py-2.5 rounded-xl text-xs font-bold bg-brand-600 text-white transition-all";
+                activeBtn.className = "gallery-filter-btn px-5 py-2.5 rounded-xl text-xs font-bold bg-brand-500 text-white transition-all";
             }
 
             renderGallery(GALLERY_ITEMS);
@@ -1338,7 +1399,7 @@
                 const tagColor = item.type === 'finish' ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800';
                 
                 const row = document.createElement('div');
-                row.className = "flex items-center justify-between p-3 bg-slate-50 border border-slate-100 rounded-2xl text-xs gap-4";
+                row.className = "flex items-center justify-between p-3 bg-slate-50 border border-slate-150 rounded-2xl text-xs gap-4";
                 row.innerHTML = `
                     <div class="flex items-center gap-3 truncate">
                         <img src="${safeImage}" class="w-10 h-10 rounded-lg object-cover bg-slate-200 shrink-0" onerror="this.onerror=null; this.src='https://placehold.co/100x100/eceff1/37474f?text=Foto'">
@@ -1348,7 +1409,7 @@
                         </div>
                     </div>
                     <div class="flex gap-1.5 shrink-0">
-                        <button onclick="editAdminPhoto('${item.id}')" class="p-2 text-slate-500 hover:text-brand-600 hover:bg-white rounded-lg border border-transparent hover:border-slate-200 transition-all" title="Edit Data">
+                        <button onclick="editAdminPhoto('${item.id}')" class="p-2 text-slate-500 hover:text-brand-500 hover:bg-white rounded-lg border border-transparent hover:border-slate-200 transition-all" title="Edit Data">
                             <i class="fa-solid fa-pen-to-square"></i>
                         </button>
                         <button onclick="deleteAdminPhoto('${item.id}')" class="p-2 text-slate-400 hover:text-red-500 hover:bg-white rounded-lg border border-transparent hover:border-slate-200 transition-all" title="Hapus Foto">
@@ -1468,7 +1529,7 @@
                 showToast("Akses ditolak!");
                 return;
             }
-            const codeString = `const GALLERY_ITEMS = ` + JSON.stringify(GALLERY_ITEMS, null, 12) + `;`;
+            const codeString = `let GALLERY_ITEMS = ` + JSON.stringify(GALLERY_ITEMS, null, 12) + `;`;
             
             // Clipboard Copy via secure executive command
             const el = document.createElement('textarea');
@@ -1481,11 +1542,11 @@
             showToast("Struktur kode database disalin ke clipboard! Tempel ke editor.");
         }
 
-        /* Initialize Leaflet JS Map inside contact section */
+        /* Initialize Leaflet JS Map inside contact section (Ciseeng, Bogor coordinates) */
         function initLeafletMap() {
-            // Sleman Office Coordinate
-            const lat = -7.7121655;
-            const lng = 110.3957813;
+            // Coordinate of Jalan Raya Ciseeng, Putat Nutug, Bogor
+            const lat = -6.4428;
+            const lng = 106.7032;
 
             try {
                 mapInstance = L.map('map', {
@@ -1497,7 +1558,7 @@
                 }).addTo(mapInstance);
 
                 const customMarker = L.marker([lat, lng]).addTo(mapInstance);
-                customMarker.bindPopup("<b>PT CBC PROPERTY</b><br>Kantor Pemasaran Sleman, Yogyakarta.").openPopup();
+                customMarker.bindPopup("<b>PT CBC PROPERTY</b><br>Jalan Raya Ciseeng, Putat Nutug, Bogor.").openPopup();
             } catch (error) {
                 console.log("Leaflet map failed to render inside hidden workspace context.", error);
             }
@@ -1526,24 +1587,24 @@
                     <button onclick="closePropertyDetail()" class="absolute top-4 right-4 w-10 h-10 rounded-full bg-slate-900/80 text-white flex items-center justify-center hover:bg-slate-950 transition-colors">
                         <i class="fa-solid fa-xmark text-lg"></i>
                     </button>
-                    <span class="absolute bottom-4 left-4 px-3 py-1 bg-brand-600 text-white font-semibold text-xs rounded-lg">${safeType}</span>
+                    <span class="absolute bottom-4 left-4 px-3 py-1 bg-brand-500 text-white font-semibold text-xs rounded-lg">${safeType}</span>
                 </div>
 
                 <div class="p-6 sm:p-8 space-y-6">
                     <div class="space-y-2">
-                        <span class="text-xs text-brand-600 font-bold uppercase tracking-wide flex items-center gap-1">
-                            <i class="fa-solid fa-shield-check"></i> ${safeLegal}
+                        <span class="text-xs text-brand-500 font-bold uppercase tracking-wide flex items-center gap-1">
+                            <i class="fa-solid fa-shield-check text-accent-500"></i> ${safeLegal}
                         </span>
                         <h3 class="text-2xl font-extrabold text-slate-900">${safeName}</h3>
                         <p class="text-xs text-slate-500 flex items-center gap-1">
-                            <i class="fa-solid fa-location-dot text-brand-500"></i> ${safeLocation}
+                            <i class="fa-solid fa-location-dot text-brand-500 mr-1"></i> ${safeLocation}
                         </p>
                     </div>
 
                     <p class="text-slate-600 text-sm leading-relaxed">${safeDesc}</p>
 
                     <div class="space-y-3">
-                        <h4 class="font-bold text-slate-800 text-sm border-b pb-2"><i class="fa-solid fa-circle-info text-brand-600 mr-1"></i> Spesifikasi Teknis</h4>
+                        <h4 class="font-bold text-slate-800 text-sm border-b pb-2"><i class="fa-solid fa-circle-info text-brand-500 mr-1"></i> Spesifikasi Teknis</h4>
                         <div class="grid grid-cols-2 gap-4 text-xs">
                             <div class="flex justify-between border-b border-slate-50 pb-2">
                                 <span class="text-slate-400">Luas Tanah (LT):</span>
@@ -1565,7 +1626,7 @@
                     </div>
 
                     <div class="space-y-3">
-                        <h4 class="font-bold text-slate-800 text-sm border-b pb-2"><i class="fa-solid fa-list-check text-brand-600 mr-1"></i> Keunggulan Spesifikasi</h4>
+                        <h4 class="font-bold text-slate-800 text-sm border-b pb-2"><i class="fa-solid fa-list-check text-brand-500 mr-1"></i> Keunggulan Spesifikasi</h4>
                         <div class="flex flex-wrap gap-2">
                             ${prop.features.map(f => `<span class="px-2.5 py-1.5 bg-slate-50 text-slate-700 rounded-lg text-xs font-semibold border border-slate-100 flex items-center gap-1.5"><i class="fa-solid fa-check text-emerald-500 text-[10px]"></i> ${sanitizeHTML(f)}</span>`).join('')}
                         </div>
@@ -1580,8 +1641,8 @@
                             <button onclick="closePropertyDetail()" class="px-5 py-3 bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold text-xs rounded-xl transition-all">
                                 Tutup
                             </button>
-                            <button onclick="bookingProperty('${safeName}')" class="px-6 py-3 bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs rounded-xl transition-all flex items-center gap-2 shadow-md shadow-brand-600/10">
-                                <i class="fa-brands fa-whatsapp text-sm"></i>
+                            <button onclick="bookingProperty('${safeName}')" class="px-6 py-3 bg-brand-500 hover:bg-brand-600 text-white font-bold text-xs rounded-xl transition-all flex items-center gap-2 shadow-md shadow-brand-500/10">
+                                <i class="fa-brands fa-whatsapp text-sm text-accent-500"></i>
                                 <span>Pesan Unit Sekarang</span>
                             </button>
                         </div>
@@ -1612,7 +1673,7 @@
         /* Booking trigger logic */
         function bookingProperty(propName) {
             const textMsg = `Halo PT CBC PROPERTY, saya sangat tertarik memesan / survey lokasi unit properti: "${propName}". Mohon dikirimkan pricelist dan informasi lengkapnya. Terima kasih.`;
-            const waUrl = `https://wa.me/628161988979?text=${encodeURIComponent(textMsg)}`;
+            const waUrl = `https://wa.me/62895359048761?text=${encodeURIComponent(textMsg)}`;
             window.open(waUrl, '_blank');
         }
 
@@ -1629,8 +1690,8 @@
             const cleanName = sanitizeHTML(name);
             const cleanMessage = sanitizeHTML(message);
 
-            const textMsg = `Halo PT CBC PROPERTY,\n\nSaya telah mengisi formulir minat lewat website dengan rincian berikut:\n\n- *Nama:* ${cleanName}\n- *Nomor WA:* ${phone}\n- *Minat Properti:* ${interest}\n- *Skema Bayar:* ${payment}\n- *Pesan:* ${cleanMessage}\n\nMohon diproses untuk rincian unit dan brosurnya. Terima kasih.`;
-            const waUrl = `https://wa.me/628161988979?text=${encodeURIComponent(textMsg)}`;
+            const textMsg = `Halo PT CBC PROPERTY,\n\nSaya telah mengisi formulir minat lewat website dengan rincian berikut:\n\n- *Nama:* ${cleanName}\n- *Nomor WA:* ${phone}\n- *Minat Properti/Layanan:* ${interest}\n- *Skema Bayar:* ${payment}\n- *Pesan:* ${cleanMessage}\n\nMohon diproses untuk rincian unit dan brosurnya. Terima kasih.`;
+            const waUrl = `https://wa.me/62895359048761?text=${encodeURIComponent(textMsg)}`;
             
             showToast("Sukses mengirimkan formulir! Mengarahkan ke WhatsApp...");
             
@@ -1643,9 +1704,9 @@
         function showToast(text) {
             const container = document.getElementById('toast-container');
             const toast = document.createElement('div');
-            toast.className = "px-5 py-4 bg-slate-900 border border-slate-800 text-white rounded-2xl flex items-center gap-3 shadow-2xl pointer-events-auto transition-all duration-300 transform translate-y-2 opacity-0 text-xs sm:text-sm";
+            toast.className = "px-5 py-4 bg-slate-900 border border-slate-800 text-white rounded-2xl flex items-center gap-3 shadow-2xl pointer-events-auto transition-all duration-300 transform translate-y-2 opacity-0 text-xs sm:text-sm z-50";
             toast.innerHTML = `
-                <div class="w-6 h-6 rounded-full bg-brand-500 flex items-center justify-center text-white text-xs shrink-0"><i class="fa-solid fa-circle-check"></i></div>
+                <div class="w-6 h-6 rounded-full bg-brand-500 flex items-center justify-center text-white text-xs shrink-0"><i class="fa-solid fa-circle-check text-accent-500"></i></div>
                 <p class="font-medium">${sanitizeHTML(text)}</p>
             `;
             container.appendChild(toast);
